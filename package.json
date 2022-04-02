@@ -2,9 +2,11 @@
   "name": "cs-546-group-40-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node tasks/build.js"
   },
   "repository": {
     "type": "git",
