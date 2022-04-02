@@ -1,0 +1,24 @@
+{
+  "name": "cs-546-group-40-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cullinap/cs-546-group-40-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cullinap/cs-546-group-40-project/issues"
+  },
+  "homepage": "https://github.com/cullinap/cs-546-group-40-project#readme",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3"
+  }
+}
