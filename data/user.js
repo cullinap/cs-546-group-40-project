@@ -3,20 +3,23 @@ const fantasyData = mongoCollections.fantasy_data;
 const { ObjectId } = require("mongodb");
 
 module.exports = {
-    async create(name) {
+    async createUser(firstName, lastName, email, password) {
         const fantasyCollection = await fantasyData()
 
         let newUser = {
-            name:name
+            firstName: firstName
+            , lastName: lastName
+            , email: email
+            , password: password 
         }
 
         const insertInfo = await fantasyCollection.insertOne(newUser)
 
-        return newUser 
+        return newUser
     },
     
     async getAll() {
-        const fantasyCollection = await bands();
+        const fantasyCollection = await fantasyData();
 
         return fantasyCollection
     }

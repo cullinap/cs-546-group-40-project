@@ -1,6 +1,7 @@
-const fantasyData = require("../data/fantasy_data"); // must have two dots for get file
+const userData = require("../data/user"); // must have two dots for get file
 const connection = require("../config/mongoConnection");
 const mongoCollections = require("../config/mongoCollections");
+const passwordHash = require('password-hash');
 
 const getFantasyInfo = mongoCollections.fantasy_data;
 
@@ -10,13 +11,17 @@ async function main() {
     console.log("creating user") 
 
     let userOne = undefined;
+    let jose_pw = passwordHash.generate('123456')
 
     try {
-        await fantasyData.create(
+        await userData.createUser(
             'Jose'
+            , 'Canseco'
+            , 'jose.canseco@gmail.com'
+            , jose_pw
         )
 
-        // fantasy_data.getAll();
+        userData.getAll();
     } catch(e) {
         console.log(e)
     }

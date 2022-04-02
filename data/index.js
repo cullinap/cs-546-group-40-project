@@ -1,5 +1,5 @@
-const fantasyData = require('./fanstasy_data')
+const userData = require('./user')
 
 module.exports = {
-    fantasyData: fantasyData
+    userData: userData
 }
