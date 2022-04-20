@@ -1,5 +1,7 @@
 const userData = require('./user')
+const playerData = require('./players')
 
 module.exports = {
-    userData: userData
+    userData: userData,
+    playerData: playerData
 }

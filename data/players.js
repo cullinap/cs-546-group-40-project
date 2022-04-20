@@ -3,22 +3,23 @@ const fantasyData = mongoCollections.fantasy_data;
 const { ObjectId } = require("mongodb");
 
 module.exports = {
-  async createUser(firstName, lastName, email, password, profilePicture) {
+  async createPlayer(firstName, lastName, debutYear, headshotPicture, position, profilePicture, teamId, playerRanking) {
     const fantasyCollection = await fantasyData();
 
-    let newUser = {
+    let newPlayer = {
       firstName: firstName,
       lastName: lastName,
-      email: email,
-      password: password,
-      teams: [],
+      debutYear: debutYear,
+      headshotPicture: headshotPicture,
+      position: position,
       profilePicture: profilePicture,
-      posts: [],
+      teamId: teamId,
+      playerRanking: playerRanking,
     };
 
-    const insertInfo = await fantasyCollection.insertOne(newUser);
+    const insertInfo = await fantasyCollection.insertOne(newPlayer);
 
-    return newUser;
+    return newPlayer;
   },
 
   async getAll() {
