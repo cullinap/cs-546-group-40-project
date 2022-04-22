@@ -1,5 +1,6 @@
 const userData = require("../data/user"); // must have two dots for get file
 const playerData = require("../data/players");
+const userTeamData = require("../data/user_team")
 const connection = require("../config/mongoConnection");
 const mongoCollections = require("../config/mongoCollections");
 const passwordHash = require('password-hash');
@@ -64,6 +65,13 @@ async function playerBuild() {
             , jose_pw
             , 'https://static.wikia.nocookie.net/baseball/images/2/21/Jos%C3%A9_Canseco.jpg/revision/latest?cb=20110511205513'
         )
+
+        await userTeamData.createPlayer(
+            123
+            , 'Jose'
+            , ['Aaron Rodgers']
+        )
+ 
 
     console.log('player created')
 
