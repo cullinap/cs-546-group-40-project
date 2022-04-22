@@ -1,10 +1,10 @@
 const mongoCollections = require("../config/mongoCollections");
-const fantasyData = mongoCollections.fantasy_data;
+const userData = mongoCollections.user_data;
 const { ObjectId } = require("mongodb");
 
 module.exports = {
   async createUser(firstName, lastName, email, password, profilePicture) {
-    const fantasyCollection = await fantasyData();
+    const userCollection = await userData();
 
     let newUser = {
       firstName: firstName,
@@ -16,21 +16,21 @@ module.exports = {
       posts: [],
     };
 
-    const insertInfo = await fantasyCollection.insertOne(newUser);
+    const insertInfo = await userCollection.insertOne(newUser);
 
     return newUser;
   },
 
   async getAll() {
-    const fantasyCollection = await fantasyData();
-    const userList = await fantasyCollection.find({}).toArray();
+    const userCollection = await userData();
+    const userList = await userCollection.find({}).toArray();
 
     return userList;
   },
 
   async getAllUsersIdAndName() {
-    const fantasyCollection = await fantasyData();
-    const userList = await fantasyCollection
+    const userCollection = await userData();
+    const userList = await userCollection
       .find({}, { projection: { firstName: 1 } })
       .toArray();
     return userList;

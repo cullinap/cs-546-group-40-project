@@ -14,5 +14,6 @@ const getCollectionFn = (collection) => {
 };
 
 module.exports = {
-    fantasy_data: getCollectionFn("fantasy_data")
+    player_data: getCollectionFn("player_data"),
+    user_data: getCollectionFn("user_data")
 }
