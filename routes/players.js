@@ -6,7 +6,7 @@ const { ObjectId } = require("mongodb");
 
 router.route("/").get(async (req, res) => {
     try {
-      res.json({'hello':'hello'})
+      res.render('posts/somedata', {title:'A test!'})
     } catch(e) {
       res.status(400).json({ error: e });
       return 
