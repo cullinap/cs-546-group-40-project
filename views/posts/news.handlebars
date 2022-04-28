@@ -1,1 +1,9 @@
-<p>The news here</p>
+<article>
+    {{#if articles}}
+    <ul>
+        {{#each articles}}
+        <li>{{headline}}</li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</article>
