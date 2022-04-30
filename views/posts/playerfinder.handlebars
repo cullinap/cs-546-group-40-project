@@ -1,0 +1,16 @@
+<article>
+    <div class="container">
+        <div class="item">
+            <h1>{{title}}</h1>
+            <p>
+                Enter a player name to search for their stats
+            </p>
+            <form method="POST" action="/searchplayers">
+                <label class="label" for="search"> Enter a player name:
+                    <input type="text" id="search" name="playerSearchTerm">
+                </label>
+                <button class="button" type="submit" >search</button>
+            </form>
+        </div>
+    </div>
+</article>

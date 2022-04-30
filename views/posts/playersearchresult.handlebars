@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="item">
+        <h1>{{title}}</h1>
+        <h2>{{playerSearchTerm}}</h2>
+        <section>
+            {{#if someData}}
+            <ul>
+                {{#each someData}}
+                    <li>
+                        <p>hej!</p>
+                    </li>
+                {{/each}}
+            </ul>
+            {{else}}
+                <p class="show-not-found">We're sorry, but no results were found for {{showSearchTerm}}.</p>
+            {{/if}}
+            <a href="/player">Make another search</a>
+        </section>
+    </div>    
+</div>

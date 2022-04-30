@@ -3,8 +3,22 @@ const playerData = mongoCollections.player_data;
 const { ObjectId } = require("mongodb");
 
 module.exports = {
+  async mapEspnIdToPlayer(espnid, firstName, lastName) {
+    const playerCollection = await playerData();
+
+    let player = {
+      espnid: espnid,
+      firstName: firstName,
+      lastName: lastName
+    }
+
+    const insertInfo = await playerCollection.insertOne(player);
+    return player;
+  },
+
   async createPlayer(firstName, lastName, debutYear, headshotPicture, position, profilePicture, teamId, playerRanking) {
     const playerCollection = await playerData();
+    const player_data = await playerNameIdMap()
 
     let newPlayer = {
       firstName: firstName,

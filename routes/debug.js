@@ -1,9 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const { homeData } = require("../data");
 
-router.get("/", async (req, res) => {
+router.get("/posts", async (req, res) => {
   try {
     res.render("posts/somedata", { title: "A test!" });
+  } catch (e) {
+    res.status(400).json({ error: e });
+    return;
+  }
+});
+
+router.get("/apidata", async (req, res) => {
+  try {
+    let playerData = await homeData.getNflPlayerData();
+    
+    res.json(playerData)
   } catch (e) {
     res.status(400).json({ error: e });
     return;
