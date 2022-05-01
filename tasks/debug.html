@@ -1,0 +1,17 @@
+<ul>{{playerInfo}}</ul>
+    {{#if playerInfo}}
+    <ul>
+        {{#each playerInfo}}
+            <li>
+                <p>{{playerInfo.weight}}</p>
+            </li>
+        {{/each}}
+    </ul>   
+    {{else}}
+        <p class="show-not-found">We're sorry, but no results were found for {{showSearchTerm}}.</p>
+    {{/if}}
+<a href="/player">Make another search</a>
+
+
+<p>{{playerInfo.weight}}</p>
+            <p>{{playerInfo.age}}</p>

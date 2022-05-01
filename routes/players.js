@@ -21,14 +21,13 @@ router.post('/searchplayers', async (req, res) => {
       let playerStats = await homeData.getPlayerStatistics(playerId)
       // const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
 
-
       res.render('posts/playersearchresult', {
-          title: 'Players found',
+          title: playerName,
           playerSearchTerm: playerName, 
-          someData: {
-            weight: playerStats['weight']
-            , age: playerStats['age']
-          }
+          playerPhoto: playerStats['headshot'],
+          playerWeight: playerStats['weight'],
+          playerAge: playerStats['age'],
+          playerCareerLength: playerStats['experience']
       })
   } catch(e) {
       res.status(404).json({error: '!Found'})

@@ -3,19 +3,17 @@
         <h1>{{title}}</h1>
         <h2>{{playerSearchTerm}}</h2>
         <section>
-            <ul>{{someData}}</ul>
-            {{#if someData}}
-            <ul>
-                {{#each someData}}
-                    <li>
-                        <p>{{this.weight}}</p>
-                    </li>
-                {{/each}}
-            </ul>
-            {{else}}
-                <p class="show-not-found">We're sorry, but no results were found for {{showSearchTerm}}.</p>
-            {{/if}}
-            <a href="/player">Make another search</a>
+          <div class="left">
+            <img id="img" alt="{{playerSearchTerm}}" src="{{playerPhoto.href}}"/> 
+          </div>
+           <ul>
+               <li>{{playerWeight}}</li>
+               <li>{{playerAge}}</li>
+               <li>{{playerCareerLength.years}}</li>
+               <li>College</li>
+               <li>Birthplace</li>
+           </ul>
         </section>
+        <a href="/player">Make another search</a>
     </div>    
 </div>
