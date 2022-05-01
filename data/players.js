@@ -2,6 +2,12 @@ const mongoCollections = require("../config/mongoCollections");
 const playerData = mongoCollections.player_data;
 const { ObjectId } = require("mongodb");
 
+const playerIDMaps = 
+ "https://cullinap.github.io/data_sources/player_id_map.json"
+
+const playerDataUrl = 
+  "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
+
 module.exports = {
   async mapEspnIdToPlayer(espnid, firstName, lastName) {
     const playerCollection = await playerData();
