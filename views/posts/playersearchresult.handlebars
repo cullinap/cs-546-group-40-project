@@ -3,11 +3,12 @@
         <h1>{{title}}</h1>
         <h2>{{playerSearchTerm}}</h2>
         <section>
+            <ul>{{someData}}</ul>
             {{#if someData}}
             <ul>
                 {{#each someData}}
                     <li>
-                        <p>hej!</p>
+                        <p>{{this.weight}}</p>
                     </li>
                 {{/each}}
             </ul>

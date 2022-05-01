@@ -16,17 +16,22 @@ router.post('/searchplayers', async (req, res) => {
       //     res.status(400).render('posts/error', {msg: 'input must contain values and not be empty'})
       // }
       const playerName = req.body.playerSearchTerm;
-      let playerData = await homeData.getNflPlayerData();
-      
+      let playerData = await homeData.getPlayerIdMap();
+      let playerId = playerData[playerName]
+      let playerStats = await homeData.getPlayerStatistics(playerId)
       // const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
 
+
       res.render('posts/playersearchresult', {
-          someData: {'1':'hi','2':'hello'},
-          showSearchTerm: req.body.playerSearchTerm, 
-          title: 'Players found'
+          title: 'Players found',
+          playerSearchTerm: playerName, 
+          someData: {
+            weight: playerStats['weight']
+            , age: playerStats['age']
+          }
       })
   } catch(e) {
-      res.status(404).json({error: 'Not Found'})
+      res.status(404).json({error: '!Found'})
   }
 })
 

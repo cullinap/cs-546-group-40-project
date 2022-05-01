@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { playerData } = require(".");
+//const { playerData } = require(".");
 const { player_data } = require("../config/mongoCollections");
 
 const nflNews =
@@ -10,6 +10,12 @@ const nflTeams =
 
 const nflPlayerData = 
   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes?limit=1000"
+
+const playerIDMaps = 
+ "https://cullinap.github.io/data_sources/player_id_map.json"
+
+const playerDataUrl = 
+  "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
 
 async function getApiData(url) {
   let { data } = await axios.get(url);
@@ -35,6 +41,21 @@ async function getNflPlayerData() {
   return apiData;
 }
 
+async function getPlayerIdMap() {
+  let apiData = await getApiData(playerIDMaps)
+  return apiData
+}
+
+async function getPlayerStatistics(playerId) {
+  let indPlayerUrl = playerDataUrl + playerId
+  let apiData = await getApiData(indPlayerUrl)
+  return apiData
+}
+
+//getPlayerStatistics(15349)
+
+
+// old -> takes too long to grab data
 async function playerNameIdMap() {
   // map player name to espn player ID
   let apiData = await getNflPlayerData()
@@ -57,6 +78,10 @@ async function playerNameIdMap() {
 }
 
 module.exports = { 
-  getNflNews, getNflTeams, getNflPlayerData, playerNameIdMap
+  getNflNews
+  , getNflTeams
+  , getNflPlayerData
+  , getPlayerIdMap
+  , getPlayerStatistics
 };
 
