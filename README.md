@@ -24,6 +24,9 @@ npm start
 ```
 
 #### Usage
+- Make a user profile
+- Check some news
+
 
 
 @TODO
