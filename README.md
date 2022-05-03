@@ -1,33 +1,41 @@
-# cs-546-group-40-project
+# group 40 project: Fantasy Sports Tracker
+
+This website functions as a fantasy sports tracker. Users can create a profile that enables them to look at the latest news in their chosen sport. Users will be able to use this website as a guide to their fantasy league by utilizing the player ranking section as well as the individual player statistics page. All data will be taken from publicly available API.
 
 @TODO
-
+- Landing Page
+- Latest News page
+- Individual player statistics page
+- User profile
+- Create user team functionality
+- Player ranking ladder
+- Add match tickets page
+- Add watch matches page
+- Add ajax functionality
+- Add css
+- Extras: add discussion board, add predictive service
 
 ##### Routes:
+- GET "/"
+    - root route 
+- GET "/player"
+    - search for individual players
+- POST "/searchplayers"
+    - individual player page
+- GET "/signup"
+- POST "/signup"
+- POST "/login"
+- GET "/private"
+- GET "/logout"
+- GET "/playerrank"
+- GET "/watchmatches"
+- GET "/matchtickets"
+- GET "/latestnews"
 
-<ol>
-    <li>GET /</li>
-        <ol>root route</ol>
-    <li>GET /player</li>
-        <ol>search for individual players</ol>
-    <li>POST /seachplayers</li>
-        <ol>individual player page</ol>
-    <li>GET /signup</li>
-        <ol></ol>
-    <li>POST /signup</li>
-        <ol></ol>
-    <li>POST /login</li>
-        <ol></ol>
-    <li>GET /private</li>
-        <ol></ol>
-    <li>GET /logout</li>
-        <ol></ol>
-    <li>GET /playerrank</li>
-        <ol></ol>
-    <li>GET /watchmatches</li>
-        <ol></ol>
-    <li>GET /matchtickets</li>
-        <ol></ol>
-    <li>GET /latestnews</li>
-        <ol></ol>
-</ol>
+##### Data:
+
+- users
+- players
+- userteam
+- discussions
+- posts (subdocument)
