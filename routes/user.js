@@ -33,4 +33,13 @@ router.get('/private', async (req, res) => {
     }
 })
 
+router.get('/logout', async (req, res) => {
+    try {
+        req.session.destroy()
+        res.render('posts/logout', {title:'logout'})
+    } catch(e) {
+        res.status(400).render('posts/login', {title:'error', error:'provide a valid username or passoword'})
+    }
+})
+
 module.exports = router;
