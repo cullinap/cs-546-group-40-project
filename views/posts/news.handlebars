@@ -1,9 +1,29 @@
 <article>
-    {{#if articles}}
+    <p>Latest NFL News</p>
+    {{#if nflArticles}}
     <ul>
-        {{#each articles}}
+        {{#each nflArticles}}
+        <li><a href="{{links.web.href}}">{{headline}}</a></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    <p>Latest College Football News</p>
+    {{#if collegeArticles}}
+    <ul>
+        {{#each collegeArticles}}
+        <li><a href="{{links.web.href}}">{{headline}}</a></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+
+    <p>Latest Baseball News</p>
+    {{#if baseballArticles}}
+    <ul>
+        {{#each baseballArticles}}
         <li><a href="{{links.web.href}}">{{headline}}</a></li>
         {{/each}}
     </ul>
     {{/if}}
 </article>
+<a href="/">Go back home</a>
