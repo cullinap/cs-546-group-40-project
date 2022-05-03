@@ -1,3 +1,17 @@
+<form action="/login" method="POST" id="login-form">
+    <label for="username">Enter a username:</label>
+    <input name="username" id="username" placeholder="enter a username here">
+    <label for="password">Enter a password:</label>
+    <input name="password" id="password" placeholder="enter a password here">
+    <button type="submit">Submit</button>
+</form>
+
+{{#if error}}
+    <p>{{error}}</p>
+{{/if}}
+
+<a href="/signup">"Need to register? Click here to sign-up"</a>
+
 <article>
   <ul>
     {{#each articles}}
