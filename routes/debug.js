@@ -4,7 +4,7 @@ const { homeData } = require("../data");
 
 router.get("/posts", async (req, res) => {
   try {
-    res.render("posts/somedata", { title: "A test!" });
+    res.render("somedata", { title: "A test!" });
   } catch (e) {
     res.status(400).json({ error: e });
     return;

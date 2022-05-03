@@ -1,4 +1,3 @@
-const userRoutes = require('./user');
 const playerRoutes = require("./players");
 const newsRoutes = require("./news");
 const homeRoutes = require("./home");
@@ -8,7 +7,6 @@ const authRoutes = require("./auth");
 const constructorMethod = (app) => {
   //app.use("/", userRoutes);
   app.use("/", newsRoutes);
-  app.use("/", userRoutes);
   app.use("/", playerRoutes);
   app.use("/debug", debugRoutes); //temporary
   app.use("/", homeRoutes);
