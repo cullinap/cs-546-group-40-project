@@ -1,11 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const { homeData, playerData } = require("../data");
+const { homeData } = require("../data");
 
-router.route("/latestnews").get(async (req, res) => {
+router.get("/latestnews", async (req, res) => {
   try {
-    let { articles } = await homeData.getNflNews();
-    res.render("posts/news", { title: "Latest News", articles: articles });
+    let news = await homeData.getNflNews();
+    console.log(news)
+    let { sports } = await homeData.getNflTeams();
+    res.render("posts/news", {
+      title: "Home",
+      articles: news.articles,
+      sports: sports,
+    });
   } catch (e) {
     res.status(400).json({ error: e });
     return;

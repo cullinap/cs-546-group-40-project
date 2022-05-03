@@ -6,7 +6,7 @@ const debugRoutes = require("./debug");
 
 const constructorMethod = (app) => {
   //app.use("/", userRoutes);
-  app.use("/latestnews", newsRoutes);
+  app.use("/", newsRoutes);
   app.use("/", playerRoutes);
   app.use("/debug", debugRoutes); //temporary
   app.use("/", homeRoutes);
