@@ -8,7 +8,7 @@ router.get("/latestnews", async (req, res) => {
     let collegeNews = await newsData.getCollegeFBNews();
     let baseballNews = await newsData.getBaseballNews();
 
-    res.render("posts/news", {
+    res.render("news", {
       title: "Latest News",
       nflArticles: nflNews.articles,
       collegeArticles: collegeNews.articles,

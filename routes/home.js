@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   try {
     let news = await homeData.getNflNews();
     let { sports } = await homeData.getNflTeams();
-    res.render("posts/home", {
+    res.render("home", {
       title: "Home",
       articles: news.articles,
       sports: sports,

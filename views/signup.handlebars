@@ -1,0 +1,13 @@
+<article>
+  {{#if error}}
+    <p>{{error}}</p>
+  {{/if}}
+  <h1>Signup</h1>
+  <form action="/signup" method="POST" id="signup-form">
+    <label for="email">Enter your email:</label>
+    <input name="email" id="email" placeholder="enter your email here" />
+    <label for="password">Enter a password:</label>
+    <input name="password" id="password" placeholder="enter a password here" />
+    <button type="submit">Submit</button>
+  </form>
+</article>
