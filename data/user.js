@@ -6,13 +6,13 @@ var validator = require("email-validator");
 
 async function createUser(email, password) {
   if (!email) {
-    throw "Username is a required field";
+    throw "Email is a required field";
   }
   if (!password) {
     throw "Password is a required field";
   }
   if (typeof email != "string") {
-    throw "Username must be a string";
+    throw "Email must be a string";
   }
   if (typeof password != "string") {
     throw "Password must be a string";
@@ -84,12 +84,14 @@ async function getAll() {
   const userList = await userCollection.find({}).toArray();
   return userList;
 }
-async function getAllUsersIdAndName() {
+
+async function getUser(email) {
   const userCollection = await users();
-  const userList = await userCollection
-    .find({}, { projection: { firstName: 1 } })
-    .toArray();
-  return userList;
+  const user = await userCollection.findOne({ email: email });
+  if (!user) {
+    throw "User not found";
+  }
+  return user;
 }
 
-module.exports = { getAll, getAllUsersIdAndName, checkUser, createUser };
+module.exports = { getAll, getUser, checkUser, createUser };

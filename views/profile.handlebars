@@ -1,0 +1,22 @@
+<article>
+  {{#if pfp}}
+    <img id="myprofile_pfp" src="{{pfp}}" />
+  {{else}}
+    <img id="myprofile_pfp" src="/public/img/no_image.jpeg" />
+  {{/if}}
+  <h1>Username</h1>
+  <p>{{username}}</p>
+  <h1>Email</h1>
+  <p>{{email}}</p>
+  <h1>Teams</h1>
+  <ul>
+    {{#each teams}}
+      <li>{{name}}</li>
+    {{/each}}
+  </ul>
+  <a href="/changepfp">Change Profile Picture</a>
+  <a href="/changeusn">Change Username</a>
+  <a href="/changepwd">Change Password</a>
+  <a href="/changeem">Change Email</a>
+  <a href="/logout">Logout</a>
+</article>

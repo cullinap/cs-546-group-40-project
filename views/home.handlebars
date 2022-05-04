@@ -1,5 +1,6 @@
 {{#if session.user.email}}
   <h2>Welcome, {{session.user.email}}</h2>
+  <a href="/myprofile">My Profile</a>
   <a href="/logout">Logout</a>
 {{else}}
   <form action="/login" method="POST" id="login-form">
