@@ -4,11 +4,9 @@ const { homeData } = require("../data");
 
 router.get("/", async (req, res) => {
   try {
-    let news = await homeData.getNflNews();
     let { sports } = await homeData.getNflTeams();
     res.render("home", {
       title: "Home",
-      articles: news.articles,
       sports: sports,
     });
   } catch (e) {
@@ -16,6 +14,5 @@ router.get("/", async (req, res) => {
     return;
   }
 });
-
 
 module.exports = router;
