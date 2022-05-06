@@ -15,11 +15,15 @@
   <h1>Email</h1>
   <p id="myprofile-em">{{email}}</p>
   <h1>Teams</h1>
-  <ul>
-    {{#each teams}}
-      <li>{{name}}</li>
-    {{/each}}
-  </ul>
+  {{#if teams}}
+    <ul>
+      {{#each teams}}
+        <li>{{name}}</li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>None</p>
+  {{/if}}
   <div id="myprofile-changepfp" hidden>
     <form id="pfp-form">
       <label for="pfpurl">Enter your new profile picture's URL:</label>
