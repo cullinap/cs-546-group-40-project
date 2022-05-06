@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { homeData } = require("../data");
 
 router.get("/", async (req, res) => {
   try {
-    let { sports } = await homeData.getNflTeams();
     res.render("home", {
       title: "Home",
     });

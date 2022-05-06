@@ -17,20 +17,4 @@ router.get("/myprofile", async (req, res) => {
   });
 });
 
-router.get("changepfp", async (req, res) => {});
-
-router.get("changeusn", async (req, res) => {});
-
-router.get("changepwd", async (req, res) => {});
-
-router.get("changeem", async (req, res) => {});
-
-router.post("changepfp", async (req, res) => {});
-
-router.post("changeusn", async (req, res) => {});
-
-router.post("changepwd", async (req, res) => {});
-
-router.post("changeem", async (req, res) => {});
-
 module.exports = router;
