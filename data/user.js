@@ -80,6 +80,14 @@ async function checkUser(email, password) {
   return true;
 }
 
+async function addPost(email, pfpUrl) {}
+
+async function removePost(email, pfpUrl) {}
+
+async function addTeam(email, pfpUrl) {}
+
+async function removeTeam(email, pfpUrl) {}
+
 async function updateUserPfp(email, pfpUrl) {
   if (!email) {
     throw "Email is a required field";
@@ -193,7 +201,7 @@ async function updateUserEm(email, newemail) {
   const userCollection = await users();
   const user = await userCollection.findOne({ email: newemail });
   if (user) {
-    throw "Email already present in system";
+    throw "Email already present in system.";
   }
   const update = await userCollection.updateOne(
     { email: email },
@@ -262,4 +270,8 @@ module.exports = {
   updateUserPwd,
   updateUserUsn,
   updateUserName,
+  addPost,
+  removePost,
+  addTeam,
+  removeTeam,
 };
