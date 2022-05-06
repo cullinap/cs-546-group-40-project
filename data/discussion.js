@@ -38,7 +38,7 @@ async function createDiscussion(ownerId, topic) {
     }
     return { discussionInserted: true };
   } catch (e) {
-    res.status(400).send(e);
+    throw e;
   }
 }
 
@@ -86,7 +86,7 @@ async function addPostToDiscussion(discussionId, postOwnerId, postContent) {
     );
     return update.modifiedCount != 0;
   } catch (e) {
-    res.status(400).send(e);
+    throw e;
   }
 }
 
@@ -113,14 +113,20 @@ async function removeDiscussion(ownerId, discussionId) {
   }
   try {
     await userData.getUser(ownerId);
+    const discussionCollection = await discussions();
     const discussion = await discussionCollection.findOne({
-      ownerId: ObjectId(ownerId),
-      _id: ObjectId(discussionId),
+      $and: [
+        {
+          ownerId: ObjectId(ownerId),
+        },
+        {
+          _id: ObjectId(discussionId),
+        },
+      ],
     });
     if (!discussion) {
       throw "User cannot delete discussion";
     }
-    const discussionCollection = await discussions();
     const deletion = await discussionCollection.deleteOne({
       _id: ObjectId(discussionId),
     });
@@ -129,7 +135,7 @@ async function removeDiscussion(ownerId, discussionId) {
     }
     return { discussionRemoved: true };
   } catch (e) {
-    res.status(400).send(e);
+    throw e;
   }
 }
 
