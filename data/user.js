@@ -125,6 +125,10 @@ async function updateUserUsn(email, username) {
     throw "Email is not valid";
   }
   const userCollection = await users();
+  const user = await userCollection.findOne({ username: username });
+  if (user) {
+    throw "Username already present in system";
+  }
   const update = await userCollection.updateOne(
     { email: email },
     { $set: { username: username } }
@@ -154,6 +158,10 @@ async function updateUserEm(email, newemail) {
     throw "newemail is not valid";
   }
   const userCollection = await users();
+  const user = await userCollection.findOne({ email: newemail });
+  if (user) {
+    throw "Email already present in system";
+  }
   const update = await userCollection.updateOne(
     { email: email },
     { $set: { email: newemail } }

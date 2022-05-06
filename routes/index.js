@@ -9,11 +9,12 @@ const constructorMethod = (app) => {
   app.use("/", newsRoutes);
   app.use("/", playerRoutes);
   app.use("/", homeRoutes);
+  app.use("/home", homeRoutes);
   app.use("/", authRoutes);
   app.use("/", profRoutes);
   app.use("/debug", debugRoutes); //temporary
   app.use("*", (req, res) => {
-    res.status(404).json({ error: "Not Found" });
+    res.status(404);
   });
 };
 

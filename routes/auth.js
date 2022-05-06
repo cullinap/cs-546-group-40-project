@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
       throw "Password should be more than 6 characters";
     }
   } catch (e) {
-    return res.status(400).render("home", { error: e });
+    return res.status(400).render("home", { alert: e });
   }
   try {
     let correctLogin = await userData.checkUser(email, password);
@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
     }
   } catch (e) {
     return res.status(400).render("home", {
-      error: e,
+      alert: e,
     });
   }
 });
@@ -70,18 +70,20 @@ router.post("/signup", async (req, res) => {
       throw "Password should be more than 6 characters";
     }
   } catch (e) {
-    return res.redirect("/");
+    return res.render("signup", { alert: e });
   }
   try {
     let newUser = await userData.createUser(email, password);
     if (newUser) {
-      res.redirect("/");
+      res.render("home", {
+        alert: "Successfully signed up. Log in with your credentials.",
+      });
     } else {
       res.status(500).send("Internal Server Error");
     }
   } catch (e) {
     return res.status(400).render("signup", {
-      error: e,
+      alert: e,
     });
   }
 });

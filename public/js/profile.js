@@ -53,54 +53,69 @@
     let url = $("#pfpurl").val();
     if (!url) {
       alert("No URL was specified.");
+      return;
     }
-    $.post("/myprofile/changepfp", { pfpurl: url }, function (receivedData) {
+    if (url === pfpImg.attr("src")) {
+      alert("Profile picture must be different from what is already set");
+      return;
+    }
+    $.post("/myprofile/changepfp", { pfpurl: url }, function () {
       pfpImg.attr("src", url);
-      alert(receivedData);
+      alert("Successfully set profile picture!");
       hideAll();
     });
+    alert("Failed to set profile picture.");
   });
   usnForm.bind("submit", (event) => {
     event.preventDefault();
     let username = $("#username").val();
     if (!username) {
       alert("No username was specified.");
+      return;
     }
-    $.post(
-      "/myprofile/changeusn",
-      { username: username },
-      function (receivedData) {
-        usnField.text(username);
-        alert(receivedData);
-        hideAll();
-      }
-    );
+    if (username === usnField.text()) {
+      alert("Username must be different from what is already set");
+      return;
+    }
+    $.post("/myprofile/changeusn", { username: username }, function () {
+      usnField.text(username);
+      alert("Successfully set username!");
+      hideAll();
+      return;
+    });
+    alert("Failed to set email.");
   });
   emForm.bind("submit", (event) => {
     event.preventDefault();
     let email = $("#email").val();
     if (!email) {
       alert("No email was specified.");
+      return;
     }
-    $.post("/myprofile/changeem", { email: email }, function (receivedData) {
+    if (email === emField.text()) {
+      alert("Email must be different from what is already set");
+      return;
+    }
+    $.post("/myprofile/changeem", { email: email }, function () {
       emField.text(email);
-      alert(receivedData);
+      alert("Successfully set email!");
       hideAll();
+      return;
     });
+    alert("Failed to set email.");
   });
   pwdForm.bind("submit", (event) => {
     event.preventDefault();
     let password = $("#password").val();
     if (!password) {
       alert("No password was specified.");
+      return;
     }
-    $.post(
-      "/myprofile/changepwd",
-      { password: password },
-      function (receivedData) {
-        alert(receivedData);
-        hideAll();
-      }
-    );
+    $.post("/myprofile/changepwd", { password: password }, function () {
+      alert("Successfully set password!");
+      hideAll();
+      return;
+    });
+    alert("Failed to set password.");
   });
 })(window.jQuery);
