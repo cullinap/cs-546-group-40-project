@@ -1,0 +1,61 @@
+<article>
+  {{#if pfp}}
+    <img id="myprofile_pfp" src="{{pfp}}" />
+  {{else}}
+    <img id="myprofile_pfp" src="/public/img/no_image.jpeg" />
+  {{/if}}
+  <h1>Username</h1>
+  <p>{{username}}</p>
+  <h1>Email</h1>
+  <p>{{email}}</p>
+  <h1>Teams</h1>
+  <ul>
+    {{#each teams}}
+      <li>{{name}}</li>
+    {{/each}}
+  </ul>
+  <div id="myprofile-changepfp" hidden>
+    <form id="pfp-form">
+      <label for="pfpurl">Enter your new profile picture's URL:</label>
+      <input type="text" name="pfpurl" id="pfpurl" placeholder="URL" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div id="myprofile-changeusername" hidden>
+    <form id="usn-form">
+      <label for="username">Enter your new username:</label>
+      <input type="text" name="username" id="username" placeholder="Username" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div id="myprofile-changeemail" hidden>
+    <form id="em-form">
+      <label for="email">Enter your new email:</label>
+      <input type="text" name="email" id="email" placeholder="Email" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div id="myprofile-changepassword" hidden>
+    <form id="pwd-form">
+      <label for="password">Enter your new password:</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <button id="myprofile-pfpButton">Change Profile Picture</button>
+  <button id="myprofile-usnButton">Change Username</button>
+  <button id="myprofile-emButton">Change Email</button>
+  <button id="myprofile-pwdButton">Change Pasword</button>
+  <a href="/logout">Logout</a>
+  <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"
+  ></script>
+  <script src="/public/js/profile.js"></script>
+</article>
