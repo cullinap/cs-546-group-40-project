@@ -16,10 +16,13 @@ app.set("view engine", "handlebars"); // view engine to handlebars
 
 app.use(
   session({
-    name: "AuthCookie",
-    secret: "some secret string!",
-    resave: false,
+    name: "546-proj-cookie",
+    secret: "the big secret that nobody should know",
+    resave: true,
     saveUninitialized: true,
+    cookie: {
+      sameSite: true,
+    },
   })
 );
 

@@ -34,7 +34,8 @@ router.post("/login", async (req, res) => {
   try {
     let correctLogin = await userData.checkUser(email, password);
     if (correctLogin) {
-      req.session.user = { email: email };
+      let user = await userData.getUser(email);
+      req.session.user = { username: user.username, email: user.email };
       res.redirect("/");
     }
   } catch (e) {

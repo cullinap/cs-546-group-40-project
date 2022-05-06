@@ -49,13 +49,13 @@ async function createUser(email, password) {
 
 async function checkUser(email, password) {
   if (!email) {
-    throw "Username is a required field";
+    throw "Email is a required field";
   }
   if (!password) {
     throw "Password is a required field";
   }
   if (typeof email != "string") {
-    throw "Username must be a string";
+    throw "Email must be a string";
   }
   if (typeof password != "string") {
     throw "Password must be a string";
@@ -77,7 +77,114 @@ async function checkUser(email, password) {
   if (!cmp) {
     throw "Either the username or password is invalid";
   }
-  return { authenticated: true };
+  return true;
+}
+
+async function updateUserPfp(email, pfpUrl) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!pfpUrl) {
+    throw "Profile picture URL is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof pfpUrl != "string") {
+    throw "Profile picture URL is a string";
+  }
+  email = email.trim().toLowerCase();
+  pfpUrl = pfpUrl.trim();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  const userCollection = await users();
+  const update = await userCollection.updateOne(
+    { email: email },
+    { $set: { profilePicture: pfpUrl } }
+  );
+  return update.modifiedCount != 0;
+}
+
+async function updateUserUsn(email, username) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!username) {
+    throw "Username is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof username != "string") {
+    throw "Username is not a string";
+  }
+  email = email.trim().toLowerCase();
+  username = username.trim();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  const userCollection = await users();
+  const update = await userCollection.updateOne(
+    { email: email },
+    { $set: { username: username } }
+  );
+  return update.modifiedCount != 0;
+}
+
+async function updateUserEm(email, newemail) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!newemail) {
+    throw "newemail is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof newemail != "string") {
+    throw "newemail is not a string";
+  }
+  email = email.trim().toLowerCase();
+  newemail = newemail.trim().toLowerCase();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  if (!validator.validate(newemail)) {
+    throw "newemail is not valid";
+  }
+  const userCollection = await users();
+  const update = await userCollection.updateOne(
+    { email: email },
+    { $set: { email: newemail } }
+  );
+  return update.modifiedCount != 0;
+}
+
+async function updateUserPwd(email, password) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!password) {
+    throw "password is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof password != "string") {
+    throw "password is not a string";
+  }
+  email = email.trim().toLowerCase();
+  password = password.trim();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  const userCollection = await users();
+  const update = await userCollection.updateOne(
+    { email: email },
+    { $set: { password: await bcrypt.hash(password, saltRounds) } }
+  );
+  return update.modifiedCount != 0;
 }
 async function getAll() {
   const userCollection = await users();
@@ -86,6 +193,16 @@ async function getAll() {
 }
 
 async function getUser(email) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  email = email.trim().toLowerCase();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
   const userCollection = await users();
   const user = await userCollection.findOne({ email: email });
   if (!user) {
@@ -94,4 +211,13 @@ async function getUser(email) {
   return user;
 }
 
-module.exports = { getAll, getUser, checkUser, createUser };
+module.exports = {
+  getAll,
+  getUser,
+  checkUser,
+  createUser,
+  updateUserEm,
+  updateUserPfp,
+  updateUserPwd,
+  updateUserUsn,
+};

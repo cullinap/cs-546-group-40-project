@@ -3,7 +3,7 @@ const newsRoutes = require("./news");
 const homeRoutes = require("./home");
 const debugRoutes = require("./debug");
 const authRoutes = require("./auth");
-const profRoutes = require("./prof");
+const profRoutes = require("./profile");
 
 const constructorMethod = (app) => {
   app.use("/", newsRoutes);
