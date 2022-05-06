@@ -15,6 +15,7 @@ router.get("/myprofile", async (req, res) => {
     username: username,
     email: email,
     pfp: profilePicture,
+    title: `${username}'s Profile`,
   });
 });
 

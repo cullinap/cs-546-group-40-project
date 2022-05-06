@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
       throw "Password should be more than 6 characters";
     }
   } catch (e) {
-    return res.status(400).render("home", { alert: e });
+    return res.status(400).render("home", { title: "Home", alert: e });
   }
   try {
     let correctLogin = await userData.checkUser(email, password);
@@ -40,13 +40,14 @@ router.post("/login", async (req, res) => {
     }
   } catch (e) {
     return res.status(400).render("home", {
+      title: "Home",
       alert: e,
     });
   }
 });
 
 router.get("/signup", async (req, res) => {
-  res.render("signup");
+  res.render("signup", { title: "Signup" });
 });
 
 router.post("/signup", async (req, res) => {
@@ -70,7 +71,7 @@ router.post("/signup", async (req, res) => {
       throw "Password should be more than 6 characters";
     }
   } catch (e) {
-    return res.render("signup", { alert: e });
+    return res.render("signup", { title: "Signup", alert: e });
   }
   try {
     let newUser = await userData.createUser(email, password);
@@ -83,6 +84,7 @@ router.post("/signup", async (req, res) => {
     }
   } catch (e) {
     return res.status(400).render("signup", {
+      title: "Signup",
       alert: e,
     });
   }
