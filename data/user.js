@@ -78,150 +78,154 @@ async function checkUser(email, password) {
   if (!cmp) {
     throw "Either the username or password is invalid";
   }
-  return true;
+  return currUser;
 }
 
-async function addPost(email, postId) {
-  if (!email) {
-    throw "Email is a required field";
+async function addPost(ownerId, postId) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!postId) {
     throw "postId is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof postId != "string") {
     throw "postId must be a string";
   }
-  email = email.trim().toLowerCase();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  postId = postId.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   if (!ObjectId.isValid(postId)) {
     throw "postId is not a valid id";
   }
   const usersCollection = await users();
   const update = await usersCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $push: { posts: postId } }
   );
   return update.modifiedCount != 0;
 }
 
-async function removePost(email, postId) {
-  if (!email) {
-    throw "Email is a required field";
+async function removePost(ownerId, postId) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!postId) {
     throw "postId is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof postId != "string") {
     throw "postId must be a string";
   }
-  email = email.trim().toLowerCase();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  postId = postId.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   if (!ObjectId.isValid(postId)) {
     throw "postId is not a valid id";
   }
   const usersCollection = await users();
   const update = await usersCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $pull: { posts: postId } }
   );
   return update.modifiedCount != 0;
 }
 
-async function addTeam(email, teamId) {
-  if (!email) {
-    throw "Email is a required field";
+async function addTeam(ownerId, teamId) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!teamId) {
     throw "teamId is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof teamId != "string") {
     throw "teamId must be a string";
   }
-  email = email.trim().toLowerCase();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  teamId = teamId.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   if (!ObjectId.isValid(teamId)) {
     throw "teamId is not a valid id";
   }
   const usersCollection = await users();
   const update = await usersCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $push: { teams: teamId } }
   );
   return update.modifiedCount != 0;
 }
 
-async function removeTeam(email, teamId) {
-  if (!email) {
-    throw "Email is a required field";
+async function removeTeam(ownerId, teamId) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!teamId) {
     throw "teamId is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof teamId != "string") {
     throw "teamId must be a string";
   }
-  email = email.trim().toLowerCase();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  teamId = teamId.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   if (!ObjectId.isValid(teamId)) {
     throw "teamId is not a valid id";
   }
   const usersCollection = await users();
   const update = await usersCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $pull: { teams: teamId } }
   );
   return update.modifiedCount != 0;
 }
 
-async function updateUserPfp(email, pfpUrl) {
-  if (!email) {
-    throw "Email is a required field";
+async function updateUserPfp(ownerId, pfpUrl) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!pfpUrl) {
     throw "Profile picture URL is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof pfpUrl != "string") {
     throw "Profile picture URL is a string";
   }
-  email = email.trim().toLowerCase();
+  ownerId = ownerId.trim();
   pfpUrl = pfpUrl.trim();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   const userCollection = await users();
   const update = await userCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $set: { profilePicture: pfpUrl } }
   );
   return update.modifiedCount != 0;
 }
 
-async function updateUserName(email, firstname, lastname) {
-  if (!email) {
-    throw "Email is a required field";
+async function updateUserName(ownerId, firstname, lastname) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!firstname) {
     throw "First name is a required field";
@@ -229,8 +233,8 @@ async function updateUserName(email, firstname, lastname) {
   if (!lastname) {
     throw "Last name is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof firstname != "string") {
     throw "First name is not a string";
@@ -238,37 +242,37 @@ async function updateUserName(email, firstname, lastname) {
   if (typeof lastname != "string") {
     throw "Last name is not a string";
   }
-  email = email.trim().toLowerCase();
+  ownerId = ownerId.trim();
   firstname = firstname.trim();
   lastname = lastname.trim();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   const userCollection = await users();
   const update = await userCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $set: { firstName: firstname, lastName: lastname } }
   );
   return update.modifiedCount != 0;
 }
 
-async function updateUserUsn(email, username) {
-  if (!email) {
-    throw "Email is a required field";
+async function updateUserUsn(ownerId, username) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!username) {
     throw "Username is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof username != "string") {
     throw "Username is not a string";
   }
-  email = email.trim().toLowerCase();
-  username = username.trim();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  username = username.trim().toLowerCase();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   const userCollection = await users();
   const user = await userCollection.findOne({ username: username });
@@ -276,29 +280,29 @@ async function updateUserUsn(email, username) {
     throw "Username already present in system";
   }
   const update = await userCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $set: { username: username } }
   );
   return update.modifiedCount != 0;
 }
 
-async function updateUserEm(email, newemail) {
-  if (!email) {
-    throw "Email is a required field";
+async function updateUserEm(ownerId, newemail) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!newemail) {
     throw "newemail is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof newemail != "string") {
     throw "newemail is not a string";
   }
-  email = email.trim().toLowerCase();
-  newemail = newemail.trim().toLowerCase();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  newemail = newemail.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   if (!validator.validate(newemail)) {
     throw "newemail is not valid";
@@ -309,33 +313,33 @@ async function updateUserEm(email, newemail) {
     throw "Email already present in system.";
   }
   const update = await userCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $set: { email: newemail } }
   );
   return update.modifiedCount != 0;
 }
 
-async function updateUserPwd(email, password) {
-  if (!email) {
-    throw "Email is a required field";
+async function updateUserPwd(ownerId, password) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
   if (!password) {
     throw "password is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
   if (typeof password != "string") {
     throw "password is not a string";
   }
-  email = email.trim().toLowerCase();
+  ownerId = ownerId.trim();
   password = password.trim();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   const userCollection = await users();
   const update = await userCollection.updateOne(
-    { email: email },
+    { _id: ObjectId(ownerId) },
     { $set: { password: await bcrypt.hash(password, saltRounds) } }
   );
   return update.modifiedCount != 0;
@@ -346,19 +350,19 @@ async function getAll() {
   return userList;
 }
 
-async function getUser(email) {
-  if (!email) {
-    throw "Email is a required field";
+async function getUser(ownerId) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
   }
-  if (typeof email != "string") {
-    throw "Email must be a string";
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
   }
-  email = email.trim().toLowerCase();
-  if (!validator.validate(email)) {
-    throw "Email is not valid";
+  ownerId = ownerId.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
   }
   const userCollection = await users();
-  const user = await userCollection.findOne({ email: email });
+  const user = await userCollection.findOne({ _id: ObjectId(ownerId) });
   if (!user) {
     throw "User not found";
   }

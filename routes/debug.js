@@ -1,25 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { homeData } = require("../data");
+const { userData, discussionData } = require("../data");
+const { ObjectId } = require("mongodb");
 
-router.get("/posts", async (req, res) => {
-  try {
-    res.render("somedata", { title: "A test!" });
-  } catch (e) {
-    res.status(400).json({ error: e });
-    return;
-  }
+router.get("/addpost", async (req, res) => {
+  await userData.removePost("email", "6274cfa9d7edd9e816510c2e");
+  res.status(200).send("Inserted");
 });
 
-router.get("/apidata", async (req, res) => {
-  try {
-    let playerData = await homeData.getNflPlayerData();
-    
-    res.json(playerData)
-  } catch (e) {
-    res.status(400).json({ error: e });
-    return;
-  }
+router.get("/adddisc", async (req, res) => {
+  await discussionData.createDiscussion("bigboys@gmail.com", "The Awesine Funny")
+  res.status(200).send("Inserted");
 });
 
 module.exports = router;

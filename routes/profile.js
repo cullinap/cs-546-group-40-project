@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { userData } = require("../data");
 var validator = require("email-validator");
+const { ObjectId } = require("mongodb");
 
 router.get("/myprofile", async (req, res) => {
   if (!req.session.user) {
@@ -9,9 +10,8 @@ router.get("/myprofile", async (req, res) => {
     return;
   }
   try {
-    let { username, email, profilePicture, firstName, lastName } = await userData.getUser(
-      req.session.user.email
-    );
+    let { username, email, profilePicture, firstName, lastName } =
+      await userData.getUser(req.session.user.uid);
     res.render("profile", {
       username: username,
       email: email,
@@ -30,18 +30,18 @@ router.post("/myprofile/changepfp", async (req, res) => {
     res.status(403);
     return;
   }
-  const email = req.session.user.email;
+  let uid = req.session.user.uid;
   let pfpUrl = req.body.pfpurl;
-  if (!email) {
-    res.status(400).send("Email is a required field");
+  if (!uid) {
+    res.status(400).send("uid is a required field");
     return;
   }
   if (!pfpUrl) {
     res.status(400).send("Profile picture URL is a required field");
     return;
   }
-  if (typeof email != "string") {
-    res.status(400).send("Email must be a string");
+  if (typeof uid != "string") {
+    res.status(400).send("uid must be a string");
     return;
   }
   if (typeof pfpUrl != "string") {
@@ -49,8 +49,13 @@ router.post("/myprofile/changepfp", async (req, res) => {
     return;
   }
   pfpUrl = pfpUrl.trim();
+  uid = uid.trim();
+  if (!ObjectId.isValid(uid)) {
+    res.status(400).send("uid is not a valid id");
+    return;
+  }
   try {
-    let response = await userData.updateUserPfp(email, pfpUrl);
+    let response = await userData.updateUserPfp(uid, pfpUrl);
     if (response) {
       res.status(200).send("Successfully changed profile picture.");
     } else {
@@ -67,11 +72,11 @@ router.post("/myprofile/changename", async (req, res) => {
     res.status(403);
     return;
   }
-  const email = req.session.user.email;
+  let uid = req.session.user.uid;
   let firstname = req.body.firstname;
   let lastname = req.body.lastname;
-  if (!email) {
-    res.status(400).send("Email is a required field");
+  if (!uid) {
+    res.status(400).send("uid is a required field");
     return;
   }
   if (!firstname) {
@@ -82,8 +87,8 @@ router.post("/myprofile/changename", async (req, res) => {
     res.status(400).send("Last name is a required field");
     return;
   }
-  if (typeof email != "string") {
-    res.status(400).send("Email must be a string");
+  if (typeof uid != "string") {
+    res.status(400).send("uid must be a string");
     return;
   }
   if (typeof firstname != "string") {
@@ -96,8 +101,13 @@ router.post("/myprofile/changename", async (req, res) => {
   }
   firstname = firstname.trim();
   lastname = lastname.trim();
+  uid = uid.trim();
+  if (!ObjectId.isValid(uid)) {
+    res.status(400).send("uid is not a valid id");
+    return;
+  }
   try {
-    let response = await userData.updateUserName(email, firstname, lastname);
+    let response = await userData.updateUserName(uid, firstname, lastname);
     if (response) {
       res.status(200).send("Successfully changed name.");
     } else {
@@ -114,18 +124,18 @@ router.post("/myprofile/changeusn", async (req, res) => {
     res.status(403);
     return;
   }
-  const email = req.session.user.email;
+  let uid = req.session.user.uid;
   let username = req.body.username;
-  if (!email) {
-    res.status(400).send("Email is a required field");
+  if (!uid) {
+    res.status(400).send("uid is a required field");
     return;
   }
   if (!username) {
     res.status(400).send("username is a required field");
     return;
   }
-  if (typeof email != "string") {
-    res.status(400).send("Email must be a string");
+  if (typeof uid != "string") {
+    res.status(400).send("uid must be a string");
     return;
   }
   if (typeof username != "string") {
@@ -133,8 +143,13 @@ router.post("/myprofile/changeusn", async (req, res) => {
     return;
   }
   username = username.trim();
+  uid = uid.trim();
+  if (!ObjectId.isValid(uid)) {
+    res.status(400).send("uid is not a valid id");
+    return;
+  }
   try {
-    let response = await userData.updateUserUsn(email, username);
+    let response = await userData.updateUserUsn(uid, username);
     if (response) {
       res.status(200).send("Successfully changed username.");
       req.session.user.username = username;
@@ -153,18 +168,18 @@ router.post("/myprofile/changepwd", async (req, res) => {
     res.status(403);
     return;
   }
-  const email = req.session.user.email;
+  let uid = req.session.user.uid;
   let password = req.body.password;
-  if (!email) {
-    res.status(400).send("Email is a required field");
+  if (!uid) {
+    res.status(400).send("uid is a required field");
     return;
   }
   if (!password) {
     res.status(400).send("password is a required field");
     return;
   }
-  if (typeof email != "string") {
-    res.status(400).send("Email must be a string");
+  if (typeof uid != "string") {
+    res.status(400).send("uid must be a string");
     return;
   }
   if (typeof password != "string") {
@@ -172,6 +187,11 @@ router.post("/myprofile/changepwd", async (req, res) => {
     return;
   }
   password = password.trim();
+  uid = uid.trim();
+  if (!ObjectId.isValid(uid)) {
+    res.status(400).send("uid is not a valid id");
+    return;
+  }
   try {
     let response = await userData.updateUserPwd(email, password);
     if (response) {
@@ -190,31 +210,36 @@ router.post("/myprofile/changeem", async (req, res) => {
     res.status(403);
     return;
   }
-  const email = req.session.user.email;
+  let uid = req.session.user.uid;
   let newemail = req.body.email;
-  if (!email) {
-    res.status(400).send("Email is a required field");
+  if (!uid) {
+    res.status(400).send("uid is a required field");
     return;
   }
   if (!newemail) {
     res.status(400).send("newemail is a required field");
     return;
   }
-  if (typeof email != "string") {
-    res.status(400).send("Email must be a string");
+  if (typeof uid != "string") {
+    res.status(400).send("uid must be a string");
     return;
   }
   if (typeof newemail != "string") {
     res.status(400).send("newemail is not a string");
     return;
   }
-  newemail = newemail.trim().toLowerCase();
+  newemail = newemail.trim();
   if (!validator.validate(newemail)) {
     res.status(400).send("Email is not valid");
     return;
   }
+  uid = uid.trim();
+  if (!ObjectId.isValid(uid)) {
+    res.status(400).send("uid is not a valid id");
+    return;
+  }
   try {
-    let response = await userData.updateUserEm(email, newemail);
+    let response = await userData.updateUserEm(uid, newemail);
     if (response) {
       res.status(200).send("Successfully changed Email.");
       req.session.user.email = newemail;
