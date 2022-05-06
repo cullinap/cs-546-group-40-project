@@ -32,10 +32,9 @@ router.post("/login", async (req, res) => {
     return res.status(400).render("home", { title: "Home", alert: e });
   }
   try {
-    let correctLogin = await userData.checkUser(email, password);
-    if (correctLogin) {
-      let user = await userData.getUser(email);
-      req.session.user = { username: user.username, email: user.email };
+    let user = await userData.checkUser(email, password);
+    if (user) {
+      req.session.user = { uid: user._id, username: user.username, email: user.email };
       res.redirect("/");
     }
   } catch (e) {

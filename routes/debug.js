@@ -1,24 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { homeData } = require("../data");
+const { userData, discussionData } = require("../data");
+const { ObjectId } = require("mongodb");
 
-router.get("/posts", async (req, res) => {
-  try {
-    res.render("somedata", { title: "A test!" });
-  } catch (e) {
-    res.status(400).json({ error: e });
-    return;
-  }
+router.get("/addpost", async (req, res) => {
+  await userData.removePost("email", "6274cfa9d7edd9e816510c2e");
+  res.status(200).send("Inserted");
 });
 
-router.get("/apidata", async (req, res) => {
+router.get("/adddisc", async (req, res) => {
   try {
-    let playerData = await homeData.getNflPlayerData();
-    
-    res.json(playerData)
+    await discussionData.removeDiscussion(
+      "6274cbb6cc25fc1c498d3b04",
+      "6274edd02049da7a3338100a"
+    );
+    res.status(200).send("Inserted");
   } catch (e) {
-    res.status(400).json({ error: e });
-    return;
+    res.status(500).json({ error: e });
   }
 });
 

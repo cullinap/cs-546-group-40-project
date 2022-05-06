@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { newsData } = require("../data");
 
-router.get("/latestnews", async (req, res) => {
+router.get("/news", async (req, res) => {
   try {
     let nflNews = await newsData.getNflNews();
     let collegeNews = await newsData.getCollegeFBNews();

@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { homeData } = require("../data");
 
-router.get("/player", async (req, res) => {
+router.get("/playersearch", async (req, res) => {
   try {
     res.render("playerfinder");
   } catch (e) {
