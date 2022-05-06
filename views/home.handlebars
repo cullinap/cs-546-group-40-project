@@ -28,19 +28,8 @@
     <p>{{error}}</p>
   {{/if}}
 
-  <ul id="home-articles" hidden>
-  </ul>
-  {{#each sports}}
-    <h2>{{name}}</h2>
-    {{#each leagues}}
-      <h3>{{name}}</h3>
-      <ul>
-        {{#each teams}}
-          <li>{{team.name}}</li>
-        {{/each}}
-      </ul>
-    {{/each}}
-  {{/each}}
+  <ul id="home-articles" hidden></ul>
+  <ul id="home-sports" hidden></ul>
   <div>
     <a href="/latestnews">Latest News</a>
     <a href="/player">Search for players</a>

@@ -7,7 +7,6 @@ router.get("/", async (req, res) => {
     let { sports } = await homeData.getNflTeams();
     res.render("home", {
       title: "Home",
-      sports: sports,
     });
   } catch (e) {
     res.status(400).json({ error: e });
