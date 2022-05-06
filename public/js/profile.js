@@ -10,7 +10,10 @@
     pfpForm = $("#pfp-form"),
     usnForm = $("#usn-form"),
     emForm = $("#em-form"),
-    pwdForm = $("#pwd-form");
+    pwdForm = $("#pwd-form"),
+    pfpImg = $("#myprofile-pfp"),
+    usnField = $("#myprofile-usn"),
+    emField = $("#myprofile-em");
 
   function clickUpdatePfp(event) {
     event.preventDefault();
@@ -52,7 +55,52 @@
       alert("No URL was specified.");
     }
     $.post("/myprofile/changepfp", { pfpurl: url }, function (receivedData) {
+      pfpImg.attr("src", url);
       alert(receivedData);
+      hideAll();
     });
+  });
+  usnForm.bind("submit", (event) => {
+    event.preventDefault();
+    let username = $("#username").val();
+    if (!username) {
+      alert("No username was specified.");
+    }
+    $.post(
+      "/myprofile/changeusn",
+      { username: username },
+      function (receivedData) {
+        usnField.text(username);
+        alert(receivedData);
+        hideAll();
+      }
+    );
+  });
+  emForm.bind("submit", (event) => {
+    event.preventDefault();
+    let email = $("#email").val();
+    if (!email) {
+      alert("No email was specified.");
+    }
+    $.post("/myprofile/changeem", { email: email }, function (receivedData) {
+      emField.text(email);
+      alert(receivedData);
+      hideAll();
+    });
+  });
+  pwdForm.bind("submit", (event) => {
+    event.preventDefault();
+    let password = $("#password").val();
+    if (!password) {
+      alert("No password was specified.");
+    }
+    $.post(
+      "/myprofile/changepwd",
+      { password: password },
+      function (receivedData) {
+        alert(receivedData);
+        hideAll();
+      }
+    );
   });
 })(window.jQuery);

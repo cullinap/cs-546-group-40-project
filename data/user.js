@@ -117,7 +117,7 @@ async function updateUserUsn(email, username) {
     throw "Email must be a string";
   }
   if (typeof username != "string") {
-    throw "Username is a string";
+    throw "Username is not a string";
   }
   email = email.trim().toLowerCase();
   username = username.trim();
@@ -142,8 +142,8 @@ async function updateUserEm(email, newemail) {
   if (typeof email != "string") {
     throw "Email must be a string";
   }
-  if (typeof username != "string") {
-    throw "newemail is a string";
+  if (typeof newemail != "string") {
+    throw "newemail is not a string";
   }
   email = email.trim().toLowerCase();
   newemail = newemail.trim().toLowerCase();
@@ -172,7 +172,7 @@ async function updateUserPwd(email, password) {
     throw "Email must be a string";
   }
   if (typeof password != "string") {
-    throw "password is a string";
+    throw "password is not a string";
   }
   email = email.trim().toLowerCase();
   password = password.trim();
