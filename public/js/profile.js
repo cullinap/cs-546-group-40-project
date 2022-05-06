@@ -59,13 +59,15 @@
       alert("Profile picture must be different from what is already set");
       return;
     }
-    $.post("/myprofile/changepfp", { pfpurl: url }, function () {
+    let request = $.post("/myprofile/changepfp", { pfpurl: url });
+    request.done(function (textStatus) {
       pfpImg.attr("src", url);
-      alert("Successfully set profile picture!");
       hideAll();
-      return;
+      alert(textStatus);
     });
-    alert("Failed to set profile picture.");
+    request.fail(function (textStatus) {
+      alert(textStatus);
+    });
   });
   usnForm.bind("submit", (event) => {
     event.preventDefault();
@@ -78,13 +80,15 @@
       alert("Username must be different from what is already set");
       return;
     }
-    $.post("/myprofile/changeusn", { username: username }, function () {
+    let request = $.post("/myprofile/changeusn", { username: username });
+    request.done(function (textStatus) {
       usnField.text(username);
-      alert("Successfully set username!");
       hideAll();
-      return;
+      alert(textStatus);
     });
-    alert("Failed to set email.");
+    request.fail(function (textStatus) {
+      alert(textStatus);
+    });
   });
   emForm.bind("submit", (event) => {
     event.preventDefault();
@@ -97,13 +101,15 @@
       alert("Email must be different from what is already set");
       return;
     }
-    $.post("/myprofile/changeem", { email: email }, function () {
+    let request = $.post("/myprofile/changeem", { email: email });
+    request.done(function (textStatus) {
       emField.text(email);
-      alert("Successfully set email!");
       hideAll();
-      return;
+      alert(textStatus);
     });
-    alert("Failed to set email.");
+    request.fail(function (textStatus) {
+      alert(textStatus);
+    });
   });
   pwdForm.bind("submit", (event) => {
     event.preventDefault();
@@ -112,11 +118,13 @@
       alert("No password was specified.");
       return;
     }
-    $.post("/myprofile/changepwd", { password: password }, function () {
-      alert("Successfully set password!");
+    let request = $.post("/myprofile/changepwd", { password: password });
+    request.done(function (textStatus) {
       hideAll();
-      return;
+      alert(textStatus);
     });
-    alert("Failed to set password.");
+    request.fail(function (textStatus) {
+      alert(textStatus);
+    });
   });
 })(window.jQuery);
