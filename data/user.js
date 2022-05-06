@@ -106,6 +106,39 @@ async function updateUserPfp(email, pfpUrl) {
   return update.modifiedCount != 0;
 }
 
+async function updateUserName(email, firstname, lastname) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!firstname) {
+    throw "First name is a required field";
+  }
+  if (!lastname) {
+    throw "Last name is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof firstname != "string") {
+    throw "First name is not a string";
+  }
+  if (typeof lastname != "string") {
+    throw "Last name is not a string";
+  }
+  email = email.trim().toLowerCase();
+  firstname = firstname.trim();
+  lastname = lastname.trim();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  const userCollection = await users();
+  const update = await userCollection.updateOne(
+    { email: email },
+    { $set: { firstName: firstname, lastName: lastname } }
+  );
+  return update.modifiedCount != 0;
+}
+
 async function updateUserUsn(email, username) {
   if (!email) {
     throw "Email is a required field";
@@ -228,4 +261,5 @@ module.exports = {
   updateUserPfp,
   updateUserPwd,
   updateUserUsn,
+  updateUserName,
 };

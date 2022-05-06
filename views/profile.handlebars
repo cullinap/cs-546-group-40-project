@@ -4,6 +4,12 @@
   {{else}}
     <img id="myprofile-pfp" src="/public/img/no_image.jpeg" />
   {{/if}}
+  <h1>Name</h1>
+  {{#if firstname}}
+    <p id="myprofile-name">{{firstname}} {{lastname}}</p>
+  {{else}}
+    <p id="myprofile-name">None</p>
+  {{/if}}
   <h1>Username</h1>
   <p id="myprofile-usn">{{username}}</p>
   <h1>Email</h1>
@@ -18,6 +24,25 @@
     <form id="pfp-form">
       <label for="pfpurl">Enter your new profile picture's URL:</label>
       <input type="text" name="pfpurl" id="pfpurl" placeholder="URL" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  <div id="myprofile-changename" hidden>
+    <form id="name-form">
+      <label for="firstname">Enter your first name:</label>
+      <input
+        type="text"
+        name="firstname"
+        id="firstname"
+        placeholder="First name"
+      />
+      <label for="lastname">Enter your last name:</label>
+      <input
+        type="text"
+        name="lastname"
+        id="lastname"
+        placeholder="Last name"
+      />
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -48,6 +73,7 @@
     </form>
   </div>
   <button id="myprofile-pfpButton">Change Profile Picture</button>
+  <button id="myprofile-nameButton">Change Name</button>
   <button id="myprofile-usnButton">Change Username</button>
   <button id="myprofile-emButton">Change Email</button>
   <button id="myprofile-pwdButton">Change Password</button>

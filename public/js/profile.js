@@ -1,17 +1,21 @@
 (function ($) {
   const changePfpDiv = $("#myprofile-changepfp"),
     changeUsnDiv = $("#myprofile-changeusername"),
+    changeNameDiv = $("#myprofile-changename"),
     changeEmDiv = $("#myprofile-changeemail"),
     changePwdDiv = $("#myprofile-changepassword"),
     pfpButton = $("#myprofile-pfpButton"),
+    nameButton = $("#myprofile-nameButton"),
     usnButton = $("#myprofile-usnButton"),
     emButton = $("#myprofile-emButton"),
     pwdButton = $("#myprofile-pwdButton"),
     pfpForm = $("#pfp-form"),
+    nameForm = $("#name-form"),
     usnForm = $("#usn-form"),
     emForm = $("#em-form"),
     pwdForm = $("#pwd-form"),
     pfpImg = $("#myprofile-pfp"),
+    nameField = $("#myprofile-name"),
     usnField = $("#myprofile-usn"),
     emField = $("#myprofile-em");
 
@@ -19,6 +23,11 @@
     event.preventDefault();
     hideAll();
     changePfpDiv.removeAttr("hidden");
+  }
+  function clickUpdateName(event) {
+    event.preventDefault();
+    hideAll();
+    changeNameDiv.removeAttr("hidden");
   }
   function clickUpdateUsn(event) {
     event.preventDefault();
@@ -41,10 +50,12 @@
     changeUsnDiv.attr("hidden", true);
     changeEmDiv.attr("hidden", true);
     changePwdDiv.attr("hidden", true);
+    changeNameDiv.attr("hidden", true);
   }
 
   pfpButton.bind("click", clickUpdatePfp);
   usnButton.bind("click", clickUpdateUsn);
+  nameButton.bind("click", clickUpdateName);
   emButton.bind("click", clickUpdateEmail);
   pwdButton.bind("click", clickUpdatePwd);
 
@@ -60,13 +71,42 @@
       return;
     }
     let request = $.post("/myprofile/changepfp", { pfpurl: url });
-    request.done(function (textStatus) {
+    request.done(function (data, textStatus, jqXHR) {
       pfpImg.attr("src", url);
       hideAll();
-      alert(textStatus);
+      alert(jqXHR.responseText);
     });
-    request.fail(function (textStatus) {
-      alert(textStatus);
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
+    });
+  });
+  nameForm.bind("submit", (event) => {
+    event.preventDefault();
+    let firstname = $("#firstname").val();
+    let lastname = $("#lastname").val();
+    if (!firstname) {
+      alert("No first name was specified.");
+      return;
+    }
+    if (!lastname) {
+      alert("No lastname name was specified.");
+      return;
+    }
+    if (firstname.includes(nameField.text())) {
+      alert("First name must be different from what is already set");
+      return;
+    }
+    let request = $.post("/myprofile/changename", {
+      firstname: firstname,
+      lastname: lastname,
+    });
+    request.done(function (data, textStatus, jqXHR) {
+      nameField.text(`${firstname} ${lastname}`);
+      hideAll();
+      alert(jqXHR.responseText);
+    });
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
     });
   });
   usnForm.bind("submit", (event) => {
@@ -81,13 +121,13 @@
       return;
     }
     let request = $.post("/myprofile/changeusn", { username: username });
-    request.done(function (textStatus) {
+    request.done(function (data, textStatus, jqXHR) {
       usnField.text(username);
       hideAll();
-      alert(textStatus);
+      alert(jqXHR.responseText);
     });
-    request.fail(function (textStatus) {
-      alert(textStatus);
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
     });
   });
   emForm.bind("submit", (event) => {
@@ -102,13 +142,13 @@
       return;
     }
     let request = $.post("/myprofile/changeem", { email: email });
-    request.done(function (textStatus) {
+    request.done(function (data, textStatus, jqXHR) {
       emField.text(email);
       hideAll();
-      alert(textStatus);
+      alert(jqXHR.responseText);
     });
-    request.fail(function (textStatus) {
-      alert(textStatus);
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
     });
   });
   pwdForm.bind("submit", (event) => {
@@ -119,12 +159,12 @@
       return;
     }
     let request = $.post("/myprofile/changepwd", { password: password });
-    request.done(function (textStatus) {
+    request.done(function (data, textStatus, jqXHR) {
       hideAll();
-      alert(textStatus);
+      alert(jqXHR.responseText);
     });
-    request.fail(function (textStatus) {
-      alert(textStatus);
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
     });
   });
 })(window.jQuery);
