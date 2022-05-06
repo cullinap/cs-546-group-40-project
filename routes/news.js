@@ -12,10 +12,10 @@ router.get("/latestnews", async (req, res) => {
       title: "Latest News",
       nflArticles: nflNews.articles,
       collegeArticles: collegeNews.articles,
-      baseballArticles: baseballNews.articles
+      baseballArticles: baseballNews.articles,
     });
   } catch (e) {
-    res.status(400).json({ error: e });
+    res.status(500).json({ error: e });
     return;
   }
 });
