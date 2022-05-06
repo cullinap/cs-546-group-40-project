@@ -3,6 +3,7 @@ const users = mongoCollections.user_data;
 const bcrypt = require("bcrypt");
 const saltRounds = 16;
 var validator = require("email-validator");
+const { ObjectId } = require("mongodb");
 
 async function createUser(email, password) {
   if (!email) {
@@ -80,13 +81,117 @@ async function checkUser(email, password) {
   return true;
 }
 
-async function addPost(email, pfpUrl) {}
+async function addPost(email, postId) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!postId) {
+    throw "postId is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof postId != "string") {
+    throw "postId must be a string";
+  }
+  email = email.trim().toLowerCase();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  if (!ObjectId.isValid(postId)) {
+    throw "postId is not a valid id";
+  }
+  const usersCollection = await users();
+  const update = await usersCollection.updateOne(
+    { email: email },
+    { $push: { posts: postId } }
+  );
+  return update.modifiedCount != 0;
+}
 
-async function removePost(email, pfpUrl) {}
+async function removePost(email, postId) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!postId) {
+    throw "postId is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof postId != "string") {
+    throw "postId must be a string";
+  }
+  email = email.trim().toLowerCase();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  if (!ObjectId.isValid(postId)) {
+    throw "postId is not a valid id";
+  }
+  const usersCollection = await users();
+  const update = await usersCollection.updateOne(
+    { email: email },
+    { $pull: { posts: postId } }
+  );
+  return update.modifiedCount != 0;
+}
 
-async function addTeam(email, pfpUrl) {}
+async function addTeam(email, teamId) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!teamId) {
+    throw "teamId is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof teamId != "string") {
+    throw "teamId must be a string";
+  }
+  email = email.trim().toLowerCase();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  if (!ObjectId.isValid(teamId)) {
+    throw "teamId is not a valid id";
+  }
+  const usersCollection = await users();
+  const update = await usersCollection.updateOne(
+    { email: email },
+    { $push: { teams: teamId } }
+  );
+  return update.modifiedCount != 0;
+}
 
-async function removeTeam(email, pfpUrl) {}
+async function removeTeam(email, teamId) {
+  if (!email) {
+    throw "Email is a required field";
+  }
+  if (!teamId) {
+    throw "teamId is a required field";
+  }
+  if (typeof email != "string") {
+    throw "Email must be a string";
+  }
+  if (typeof teamId != "string") {
+    throw "teamId must be a string";
+  }
+  email = email.trim().toLowerCase();
+  if (!validator.validate(email)) {
+    throw "Email is not valid";
+  }
+  if (!ObjectId.isValid(teamId)) {
+    throw "teamId is not a valid id";
+  }
+  const usersCollection = await users();
+  const update = await usersCollection.updateOne(
+    { email: email },
+    { $pull: { teams: teamId } }
+  );
+  return update.modifiedCount != 0;
+}
 
 async function updateUserPfp(email, pfpUrl) {
   if (!email) {
