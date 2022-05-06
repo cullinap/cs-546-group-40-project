@@ -10,7 +10,7 @@ router.get("/myprofile", async (req, res) => {
   let { username, email, profilePicture } = await userData.getUser(
     req.session.user.email
   );
-  res.render("profile", {
+  res.render("profile/profile", {
     username: username,
     email: email,
     pfp: profilePicture,
