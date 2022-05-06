@@ -63,6 +63,7 @@
       pfpImg.attr("src", url);
       alert("Successfully set profile picture!");
       hideAll();
+      return;
     });
     alert("Failed to set profile picture.");
   });
