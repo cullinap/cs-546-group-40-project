@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { homeData } = require("../data");
+const { playerData } = require("../data");
 
 router.get("/playersearch", async (req, res) => {
   try {
@@ -16,9 +16,11 @@ router.post("/searchplayers", async (req, res) => {
     //     res.status(400).render('error', {msg: 'input must contain values and not be empty'})
     // }
     const playerName = req.body.playerSearchTerm;
-    let playerData = await homeData.getPlayerIdMap();
-    let playerId = playerData[playerName];
-    let playerStats = await homeData.getPlayerStatistics(playerId);
+    console.log('here')
+    let playerStatData = await playerData.getPlayerIdMap();
+    console.log('here')
+    let playerId = playerStatData[playerName];
+    let playerStats = await playerData.getPlayerStatistics(playerId);
     // const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
 
     res.render("playersearchresult", {

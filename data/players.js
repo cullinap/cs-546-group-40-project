@@ -1,3 +1,4 @@
+const axios = require("axios");
 const mongoCollections = require("../config/mongoCollections");
 const playerData = mongoCollections.player_data;
 const { ObjectId } = require("mongodb");
@@ -8,7 +9,24 @@ const playerIDMaps =
 const playerDataUrl = 
   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
 
+async function getApiData(url) {
+  let { data } = await axios.get(url);
+  return data;
+}
+
+
 module.exports = {
+  async getPlayerIdMap() {
+    let apiData = await getApiData(playerIDMaps)
+    return apiData
+  },
+  
+  async getPlayerStatistics(playerId) {
+    let indPlayerUrl = playerDataUrl + playerId
+    let apiData = await getApiData(indPlayerUrl)
+    return apiData
+  },
+
   async mapEspnIdToPlayer(espnid, firstName, lastName) {
     const playerCollection = await playerData();
 
