@@ -3,13 +3,13 @@ const userTeamData = mongoCollections.user_team_data;
 const { ObjectId } = require("mongodb");
 
 module.exports = {
-  async createPlayer(ownerId, name, players) {
+  async createTeam(ownerId, name, players) {
     const userTeamCollection = await userTeamData();
 
     let userTeam = {
         ownerId: ownerId,
         name: name,
-        players: [],
+        players: players,
     };
 
     const insertInfo = await userTeamCollection.insertOne(userTeam);
