@@ -16,9 +16,7 @@ router.post("/searchplayers", async (req, res) => {
     //     res.status(400).render('error', {msg: 'input must contain values and not be empty'})
     // }
     const playerName = req.body.playerSearchTerm;
-    console.log('here')
     let playerStatData = await playerData.getPlayerIdMap();
-    console.log('here')
     let playerId = playerStatData[playerName];
     let playerStats = await playerData.getPlayerStatistics(playerId);
     // const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
