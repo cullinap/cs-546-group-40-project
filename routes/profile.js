@@ -269,8 +269,9 @@ router.get("/myprofile/myteam", async (req, res) => {
   } catch (e) {
     res.status(500).send(e);
   }
-
 });
+
+
 
 
 module.exports = router;

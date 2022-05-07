@@ -12,7 +12,7 @@ async function userSeed() {
     try {
 
         let email_one = 'firstuser@gmail.com';
-        let password_one = passwordHash.generate('123456')
+        let password_one = passwordHash.generate('12345678')
     
         let email_two = 'seconduser@yahoo.com';
         let password_two = passwordHash.generate('password')
