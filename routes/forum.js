@@ -120,6 +120,13 @@ router.get("/forum/getdiscussions", async (req, res) => {
   try {
     let response = await discussionData.getAllDiscussions();
     if (response) {
+      for (let i = 0; i < response.length; i++) {
+        let resUserData = await userData.getUserData(
+          response[i].ownerId.toString()
+        );
+        response[i].username = resUserData.username;
+        response[i].pfp = resUserData.pfp;
+      }
       res.status(200).json(response);
     } else {
       res.status(500).send("Failed to retrieve discussions.");
@@ -204,6 +211,13 @@ router.get("/forum/getrecentposts", async (req, res) => {
   try {
     let response = await discussionData.getMostRecentPosts();
     if (response) {
+      for (let i = 0; i < response.length; i++) {
+        let resUserData = await userData.getUserData(
+          response[i].ownerId.toString()
+        );
+        response[i].username = resUserData.username;
+        response[i].pfp = resUserData.pfp;
+      }
       res.status(200).json(response);
     } else {
       res.status(500).send("Failed to retrieve posts.");

@@ -128,10 +128,9 @@ async function getMostRecentPosts() {
     return a.date > b.date;
   });
   if (recentPosts.length >= 5) {
-    return recentPosts.slice(4);
-  } else {
-    return recentPosts;
+    recentPosts = recentPosts.slice(4);
   }
+  return recentPosts;
 }
 
 async function getPost(postId) {

@@ -1,32 +1,89 @@
 <article>
-  <h1>Fantasy Sports Forum</h1>
-  <div id="forum">
-    <div id="forum-mrp" hidden>
-      <h2 id="forum-mrp-heading">Most Recent Posts</h2>
-      <ul id="forum-mrp-list">
-      </ul>
+  <div class="container" id="forum">
+    <div class="row mb-2">
+      <div class="nav justify-content-center">
+        <div class="nav-item">
+          <a class="nav-link active text" href="/">Back to home</a>
+        </div>
+        <div class="nav-item">
+          {{#if session.user.username}}
+            <a
+              href=""
+              type="button"
+              id="forum-cd-button"
+              class="nav-link active text"
+              data-bs-toggle="modal"
+              data-bs-target="#forum-newdisc"
+            >
+              Create New Discussion
+            </a>
+          {{/if}}
+        </div>
+      </div>
     </div>
-    <div id="forum-disc" hidden>
-      <h2 id="forum-disc-heading">Discussions</h2>
-      <ul id="forum-disc-list"></ul>
+    <div class="row align-items-center">
+      <div class="col">
+        <div id="forum-mrp" hidden>
+          <h2 id="forum-mrp-heading" class="subheadings text">Most Recent Posts</h2>
+          <div id="forum-mrp-list" class="list-group">
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div id="forum-disc" hidden>
+          <h2 id="forum-disc-heading" class="subheadings text">Active
+            Discussions</h2>
+          <div id="forum-disc-list" class="list-group"></div>
+        </div>
+      </div>
     </div>
-    {{#if session.user.username}}
-      <button id="forum-cd-button">Create New Discussion</button>
-    {{/if}}
   </div>
-  <div id="forum-newdisc-form" hidden>
-    <form id="newdisc-form">
-      <label for="topic">Discussion Topic:</label>
-      <input type="text" name="topic" id="topic" />
-      <button type="submit">Submit</button>
-    </form>
-    <button id="forum-cd-cancel-button">Cancel</button>
+  <div
+    class="modal fade"
+    id="forum-newdisc"
+    tabindex="-1"
+    aria-labelledby="forum-newdisc"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text" id="forum-newdisc">New Discussion</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="newdisc-form">
+            <div class="mb-2">
+              <label for="topic" class="form-label text">Discussion Topic:</label>
+              <input type="text" name="topic" id="topic" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary text">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary text"
+            data-bs-dismiss="modal"
+          >Close</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <a href="/">Back to home</a>
   <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"
   ></script>
   <script src="/public/js/forum.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"
+  ></script>
 </article>

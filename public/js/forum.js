@@ -1,22 +1,5 @@
 (function ($) {
-  forumInterface = $("#forum");
-  createDiscButton = $("#forum-cd-button");
-  newDiscussionFormDiv = $("#forum-newdisc-form");
   newDiscussionForm = $("#newdisc-form");
-  cancelDiscButton = $("#forum-cd-cancel-button");
-
-  function clickCreateButton(event) {
-    event.preventDefault();
-    forumInterface.attr("hidden", true);
-    newDiscussionFormDiv.removeAttr("hidden");
-  }
-  function clickCancelButton(event) {
-    event.preventDefault();
-    forumInterface.removeAttr("hidden");
-    newDiscussionFormDiv.attr("hidden", true);
-  }
-  createDiscButton.bind("click", clickCreateButton);
-  cancelDiscButton.bind("click", clickCancelButton);
   newDiscussionForm.bind("submit", (event) => {
     event.preventDefault();
     let topic = $("#topic").val();
@@ -44,7 +27,7 @@
       for (let i = 0; i < response.length; i++) {
         let currPost = response[i];
         let newHyperlink = $(
-          `<li><a href="/forum/discussion/${currPost.discussionId}">${currPost.content}</a></li>`
+          `<a class="list-group-item list-group-item-action" href="/forum/discussion/${currPost.discussionId}">"${currPost.content}" written by ${currPost.username}</a>`
         );
         recentsList.append(newHyperlink);
       }
@@ -66,7 +49,7 @@
       for (let i = 0; i < response.length; i++) {
         let currDisc = response[i];
         let newHyperlink = $(
-          `<li><a href="/forum/discussion/${currDisc._id}">${currDisc.topic}</a></li>`
+          `<a class="list-group-item list-group-item-action" href="/forum/discussion/${currDisc._id}">"${currDisc.topic}" started by ${currDisc.username}</a>`
         );
         discList.append(newHyperlink);
       }
