@@ -22,3 +22,22 @@ body {
     text-align: center;
 
 }
+.nav-item{
+  border-bottom: 2px solid #333333;
+}
+.nav-item a{
+  color: rgb(0, 0, 0)
+}
+.nav-item a:hover{
+  color: rgb(1, 160, 160);
+
+}
+
+.mb-2 input{
+  background: linear-gradient(to top, rgba(30, 30, 30, 0.8)50%,rgba(30, 30, 30, 0.8)50%);
+
+  color:white;
+}
+.mb-2 input:focus{
+  color: white;
+}
