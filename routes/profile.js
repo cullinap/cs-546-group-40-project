@@ -11,7 +11,7 @@ router.get("/profile", async (req, res) => {
     return;
   }
   try {
-    let { username, email, profilePicture, firstName, lastName, posts } =
+    let { username, email, profilePicture, firstName, lastName, posts, teams } =
       await userData.getUser(req.session.user.uid);
     let postList = [];
     for (let i = 0; i < posts.length; i++) {
@@ -24,6 +24,7 @@ router.get("/profile", async (req, res) => {
       firstname: firstName,
       lastname: lastName,
       posts: postList,
+      teams: teams,
       title: `${username}'s Profile`,
     });
   } catch (e) {
