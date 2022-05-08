@@ -1,35 +1,80 @@
 <article>
-  {{#if alert}}
-    <h1>{{alert}}</h1>
-  {{/if}}
-  {{#if session.user.username}}
-    <h2>Welcome, {{session.user.username}}</h2>
-    <a href="/profile">My Profile</a>
-    <a href="/logout">Logout</a>
-  {{else}}
-    <form action="/login" method="POST" id="login-form">
-      <label for="email">Enter your email:</label>
-      <input type="text" name="email" id="email" placeholder="Email" />
-      <label for="password">Enter a password:</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Password"
-      />
-      <button type="submit">Submit</button>
-    </form>
-    <a href="/signup">"Need to register? Click here to sign-up"</a>
-  {{/if}}
+  <div class="container mb-3 mt-3">
+    <div class="row align-items-center">
+      <div class="nav justify-content-center">
+        <div class="nav-item">
+          <a class="nav-link active text" href="/forum">Forums</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link active text" href="/news">Latest news</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link active text" href="/teamcreator">Create a team</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link active text" href="/playersearch">Search for
+            players</a>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link active text" href="/teamsearch">Search for teams</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {{#if alert}}
+          <div class="alert alert-warning text alert-text" role="alert">
+            {{alert}}
+          </div>
+        {{/if}}
+        {{#if session.user.username}}
+          <h2 class="text">Welcome, {{session.user.username}}</h2>
+          <a class="btn btn-primary text" href="/profile">My Profile</a>
+          <a class="btn btn-primary text" href="/logout">Logout</a>
+        {{else}}
+          <h2 class="text subheadings">Login</h2>
+          <form action="/login" method="POST" id="login-form">
+            <div class="mb-2">
+              <label for="email" class="form-label text">Enter your email:</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Email"
+                class="form-control"
+              />
+            </div>
+            <div class="mb-2">
+              <label for="password" class="form-label text">Enter a password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                class="form-control"
+              />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-primary mb-2 text"
+            >Submit</button>
+            <a class="btn btn-info text mb-2" href="/signup">"Need to register?
+              Click here to sign-up"</a>
+          </form>
 
-  <ul id="home-articles" hidden></ul>
-  <ul id="home-sports" hidden></ul>
-  <div>
-    <a href="/forum">Forums</a>
-    <a href="/news">Latest news</a>
-    <a href="/teamcreator">Create a team</a>
-    <a href="/playersearch">Search for players</a>
-    <a href="/teamsearch">Search for teams</a>
+        {{/if}}
+      </div>
+      <div class="col">
+        <h2 class="text subheadings">Top Latest News Articles</h2>
+        <ul id="home-articles" hidden></ul>
+      </div>
+      <div class="col">
+        <h2 class="text subheadings">Top Active Sports</h2>
+        <ul id="home-sports" hidden></ul>
+      </div>
+    </div>
   </div>
   <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"

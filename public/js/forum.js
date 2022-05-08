@@ -1,4 +1,20 @@
 (function ($) {
+  newDiscussionForm = $("#newdisc-form");
+  newDiscussionForm.bind("submit", (event) => {
+    event.preventDefault();
+    let topic = $("#topic").val();
+    if (!topic) {
+      alert("No topic was specified.");
+      return;
+    }
+    let request = $.post("/forum/creatediscussion", { topic: topic });
+    request.done(function (data, textStatus, jqXHR) {
+      window.location.href = `/forum/discussion/${data.discussionId}`;
+    });
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
+    });
+  });
   $(document).ready(function () {
     var request = {
       method: "GET",
@@ -11,7 +27,7 @@
       for (let i = 0; i < response.length; i++) {
         let currPost = response[i];
         let newHyperlink = $(
-          `<li><a href="/forum/discussion/${currPost.discussionId}">${currPost.content}</a></li>`
+          `<a class="list-group-item list-group-item-action" href="/forum/discussion/${currPost.discussionId}">"${currPost.content}" written by ${currPost.username}</a>`
         );
         recentsList.append(newHyperlink);
       }
@@ -33,7 +49,7 @@
       for (let i = 0; i < response.length; i++) {
         let currDisc = response[i];
         let newHyperlink = $(
-          `<li><a href="/forum/discussion/${currDisc._id}">${currDisc.topic}</a></li>`
+          `<a class="list-group-item list-group-item-action" href="/forum/discussion/${currDisc._id}">"${currDisc.topic}" started by ${currDisc.username}</a>`
         );
         discList.append(newHyperlink);
       }

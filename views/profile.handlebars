@@ -14,6 +14,16 @@
   <p id="myprofile-usn">{{username}}</p>
   <h1>Email</h1>
   <p id="myprofile-em">{{email}}</p>
+  <h1>Posts</h1>
+  {{#if posts}}
+    <ul>
+      {{#each posts}}
+        <li><a href="/forum/discussion/{{discussionId}}">{{content}}</a></li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p>None</p>
+  {{/if}}
   <h1>Teams</h1>
   {{#if teams}}
     <ul>

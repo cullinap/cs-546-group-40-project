@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { userData } = require("../data");
+const { userData, discussionData } = require("../data");
 var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
 
@@ -10,14 +10,19 @@ router.get("/profile", async (req, res) => {
     return;
   }
   try {
-    let { username, email, profilePicture, firstName, lastName } =
+    let { username, email, profilePicture, firstName, lastName, posts } =
       await userData.getUser(req.session.user.uid);
+    let postList = [];
+    for (let i = 0; i < posts.length; i++) {
+      postList.push(await discussionData.getPost(posts[i]));
+    }
     res.render("profile", {
       username: username,
       email: email,
       pfp: profilePicture,
       firstname: firstName,
       lastname: lastName,
+      posts: postList,
       title: `${username}'s Profile`,
     });
   } catch (e) {
@@ -271,7 +276,6 @@ router.get("/profile/myteam", async (req, res) => {
   try {
     let { username } = await userData.getUser(req.session.user.uid);
 
-
     res.render("myteam", {
       username: username,
       team: "playerOne",
@@ -289,7 +293,7 @@ router.post("/profile/addplayer", async (req, res) => {
   }
   try {
     let { username } = await userData.getUser(req.session.user.uid);
-    let playerTerm = req.body.playerAddTerm
+    let playerTerm = req.body.playerAddTerm;
 
     res.render("myteam", {
       username: username,

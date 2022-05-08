@@ -46,7 +46,7 @@ router.post("/forum/creatediscussion", async (req, res) => {
   try {
     let response = await discussionData.createDiscussion(uid, topic);
     if (response) {
-      res.status(200).send("Successfully created discussion.");
+      res.status(200).json(response);
     } else {
       res.status(500).send("Failed to create discussion.");
     }
@@ -104,6 +104,7 @@ router.post("/forum/addpost", async (req, res) => {
       uid,
       postContent
     );
+    await userData.addPost(uid, response.toString());
     if (response) {
       res.status(200).send("Successfully created post.");
     } else {
@@ -119,6 +120,13 @@ router.get("/forum/getdiscussions", async (req, res) => {
   try {
     let response = await discussionData.getAllDiscussions();
     if (response) {
+      for (let i = 0; i < response.length; i++) {
+        let resUserData = await userData.getUserData(
+          response[i].ownerId.toString()
+        );
+        response[i].username = resUserData.username;
+        response[i].pfp = resUserData.pfp;
+      }
       res.status(200).json(response);
     } else {
       res.status(500).send("Failed to retrieve discussions.");
@@ -151,6 +159,11 @@ router.get("/forum/discussion/:id", async (req, res) => {
       let currProf = await userData.getUserData(currPost.ownerId.toString());
       response.posts[i].ownerPfp = currProf.pfp;
       response.posts[i].ownerUsn = currProf.username;
+      if (req.session.user) {
+        if (currPost.ownerId.toString() === req.session.user.uid) {
+          response.posts[i].isOwner = true;
+        }
+      }
     }
     if (response) {
       res.render("discussion", {
@@ -198,117 +211,16 @@ router.get("/forum/getrecentposts", async (req, res) => {
   try {
     let response = await discussionData.getMostRecentPosts();
     if (response) {
+      for (let i = 0; i < response.length; i++) {
+        let resUserData = await userData.getUserData(
+          response[i].ownerId.toString()
+        );
+        response[i].username = resUserData.username;
+        response[i].pfp = resUserData.pfp;
+      }
       res.status(200).json(response);
     } else {
       res.status(500).send("Failed to retrieve posts.");
-    }
-    return;
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
-
-router.delete("/forum/removepost", async (req, res) => {
-  if (!req.session.user) {
-    res.status(403);
-    return;
-  }
-  let uid = req.session.user.uid;
-  if (!uid) {
-    res.status(400).send("uid is a required field");
-    return;
-  }
-  if (typeof uid != "string") {
-    res.status(400).send("uid must be a string");
-    return;
-  }
-  uid = uid.trim();
-  if (!ObjectId.isValid(uid)) {
-    res.status(400).send("uid is not a valid id");
-    return;
-  }
-  let { discussionId, postId } = req.body;
-  if (!discussionId) {
-    res.status(400).send("discussionId is a required field");
-    return;
-  }
-  if (typeof discussionId != "string") {
-    res.status(400).send("discussionId must be a string");
-    return;
-  }
-  discussionId = discussionId.trim();
-  if (!ObjectId.isValid(discussionId)) {
-    res.status(400).send("discussionId is not a valid id");
-    return;
-  }
-  if (!postId) {
-    res.status(400).send("postId is a required field");
-    return;
-  }
-  if (typeof postId != "string") {
-    res.status(400).send("postId must be a string");
-    return;
-  }
-  postId = postId.trim();
-  if (!ObjectId.isValid(postId)) {
-    res.status(400).send("postId is not a valid id");
-    return;
-  }
-  try {
-    let response = await discussionData.removePostFromDiscussion(
-      discussionId,
-      postId
-    );
-    if (response) {
-      res.status(200).json("Successfully deleted post.");
-    } else {
-      res.status(500).send("Failed to delete post.");
-    }
-    return;
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
-
-router.delete("/forum/removediscussion", async (req, res) => {
-  if (!req.session.user) {
-    res.status(403);
-    return;
-  }
-  let uid = req.session.user.uid;
-  if (!uid) {
-    res.status(400).send("uid is a required field");
-    return;
-  }
-  if (typeof uid != "string") {
-    res.status(400).send("uid must be a string");
-    return;
-  }
-  uid = uid.trim();
-  if (!ObjectId.isValid(uid)) {
-    res.status(400).send("uid is not a valid id");
-    return;
-  }
-  let { discussionId } = req.body;
-  if (!discussionId) {
-    res.status(400).send("discussionId is a required field");
-    return;
-  }
-  if (typeof discussionId != "string") {
-    res.status(400).send("discussionId must be a string");
-    return;
-  }
-  discussionId = discussionId.trim();
-  if (!ObjectId.isValid(discussionId)) {
-    res.status(400).send("discussionId is not a valid id");
-    return;
-  }
-  try {
-    let response = await discussionData.removeDiscussion(uid, discussionId);
-    if (response) {
-      res.status(200).json("Successfully deleted discission.");
-    } else {
-      res.status(500).send("Failed to delete discussion.");
     }
     return;
   } catch (e) {
