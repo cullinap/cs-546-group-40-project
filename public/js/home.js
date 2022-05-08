@@ -20,7 +20,7 @@
       for (let i = 0; i < response.articles.length; i++) {
         const currArticle = response.articles[i];
         let newHyperlink = $(
-          `<li><a href=${currArticle.links.web.href}>${currArticle.headline}</a></li>`
+          `<li><a href=${currArticle.links.web.href} target="_blank" class="text">${currArticle.headline}</a></li>`
         );
         newsList.append(newHyperlink);
       }
@@ -38,17 +38,17 @@
       let sports = response.sports;
       for (let i = 0; i < sports.length; i++) {
         let currSport = sports[i];
-        let newHeader = $(`<h2>${currSport.name}</h2>`);
+        let newHeader = $(`<h4 class="text">${currSport.name}</h4>`);
         var newSportsList = $(`<ul id="list-${currSport.slug}"></ul>`);
         let leagues = sports[i].leagues;
         for (let j = 0; j < leagues.length; j++) {
           let currLeague = leagues[j];
-          let newHeader = $(`<h3>${currLeague.name}</h3>`);
+          let newHeader = $(`<h5 class="text">${currLeague.name}</h5>`);
           var newLeagueList = $(`<ul id="league-${currLeague.slug}"></ul>`);
           let teams = currLeague.teams;
           for (let k = 0; k < teams.length; k++) {
             let currTeam = teams[k].team;
-            let newTeam = $(`<li>${currTeam.displayName}</li>`);
+            let newTeam = $(`<li class="text">${currTeam.displayName}</li>`);
             newLeagueList.append(newTeam);
           }
           newSportsList.append(newHeader);

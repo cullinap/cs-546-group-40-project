@@ -2,19 +2,20 @@
   <div class="container mb-3 mt-3">
     <div class="row align-items-center">
       <div class="col">
-        <a class="btn btn-secondary" href="/forum">Forums</a>
+        <a class="btn btn-secondary text" href="/forum">Forums</a>
       </div>
       <div class="col">
-        <a class="btn btn-secondary" href="/news">Latest news</a>
+        <a class="btn btn-secondary text" href="/news">Latest news</a>
       </div>
       <div class="col">
-        <a class="btn btn-secondary" href="/teamcreator">Create a team</a>
+        <a class="btn btn-secondary text" href="/teamcreator">Create a team</a>
       </div>
       <div class="col">
-        <a class="btn btn-secondary" href="/playersearch">Search for players</a>
+        <a class="btn btn-secondary text" href="/playersearch">Search for
+          players</a>
       </div>
       <div class="col">
-        <a class="btn btn-secondary" href="/teamsearch">Search for teams</a>
+        <a class="btn btn-secondary text" href="/teamsearch">Search for teams</a>
       </div>
     </div>
   </div>
@@ -22,17 +23,19 @@
     <div class="row">
       <div class="col">
         {{#if alert}}
-          <h1>{{alert}}</h1>
+          <div class="alert alert-warning text alert-text" role="alert">
+            {{alert}}
+          </div>
         {{/if}}
         {{#if session.user.username}}
-          <h2>Welcome, {{session.user.username}}</h2>
-          <a href="/profile">My Profile</a>
-          <a href="/logout">Logout</a>
+          <h2 class="text">Welcome, {{session.user.username}}</h2>
+          <a class="btn btn-primary text" href="/profile">My Profile</a>
+          <a class="btn btn-primary text" href="/logout">Logout</a>
         {{else}}
-          <h2>Login</h2>
+          <h2 class="text subheadings">Login</h2>
           <form action="/login" method="POST" id="login-form">
             <div class="mb-2">
-              <label for="email" class="form-label">Enter your email:</label>
+              <label for="email" class="form-label text">Enter your email:</label>
               <input
                 type="text"
                 name="email"
@@ -42,7 +45,7 @@
               />
             </div>
             <div class="mb-2">
-              <label for="password" class="form-label">Enter a password:</label>
+              <label for="password" class="form-label text">Enter a password:</label>
               <input
                 type="password"
                 name="password"
@@ -51,18 +54,22 @@
                 class="form-control"
               />
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+            <button
+              type="submit"
+              class="btn btn-primary mb-2 text"
+            >Submit</button>
+            <a class="btn btn-info text mb-2" href="/signup">"Need to register?
+              Click here to sign-up"</a>
           </form>
-          <a class="btn" href="/signup">"Need to register? Click here to
-            sign-up"</a>
+
         {{/if}}
       </div>
       <div class="col">
-        <h2>Top Latest News Articles</h2>
+        <h2 class="text subheadings">Top Latest News Articles</h2>
         <ul id="home-articles" hidden></ul>
       </div>
       <div class="col">
-        <h2>Top Active Sports</h2>
+        <h2 class="text subheadings">Top Active Sports</h2>
         <ul id="home-sports" hidden></ul>
       </div>
     </div>

@@ -4,11 +4,21 @@ body {
 
 #main-header {
   font-size: 80px;
-
   text-align: center;
   margin: 15px;
 }
 
-.subtext {
+.subheadings {
+    font-size: 35px;
+    margin: 10px;
+    text-align: center;
+}
+
+.text {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.alert-text {
+    text-align: center;
+
 }
