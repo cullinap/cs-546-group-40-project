@@ -1,0 +1,15 @@
+<article>
+  <p>Tickets</p>
+  {{#if tm}}
+    <h2>Ticketmaster</h2>
+    <ul>
+      {{#each tm}}
+        <li><a
+            href="https://youtu.be/{{id.videoId}}"
+            target="_blank"
+          >{{snippet.title}}</a></li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</article>
+<a href="/">Go back home</a>
