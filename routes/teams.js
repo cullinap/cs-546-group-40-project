@@ -3,6 +3,7 @@ const router = express.Router();
 const { userData, utilData, userTeamData } = require("../data");
 var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
+var xss = require("xss");
 
 
 router.get("/teamcreator", async (req, res) => {
@@ -50,7 +51,8 @@ router.get("/profile/myteam", async (req, res) => {
     }
     try {
       let { username } = await userData.getUser(req.session.user.uid);
-  
+      let teams = await 
+
       res.render("myteam", {
         username: username,
         team: "playerOne",

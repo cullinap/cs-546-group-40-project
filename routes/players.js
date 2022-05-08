@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const { playerData } = require("../data");
 
+function checkInput(value) {
+  if(value.trim().length === 0) 
+      return true
+  return false
+}
+
 router.get("/playersearch", async (req, res) => {
   try {
     res.render("playerfinder");
@@ -11,15 +17,17 @@ router.get("/playersearch", async (req, res) => {
 });
 
 router.post("/searchplayers", async (req, res) => {
+  if(checkInput(req.body.playerSearchTerm)){
+    res.status(400).render(
+      'playerfinder', 
+      {msg: 'input must contain values and not be empty'})
+  }
+  
   try {
-    // if(checkInput(req.body.showSearchTerm)){
-    //     res.status(400).render('error', {msg: 'input must contain values and not be empty'})
-    // }
     const playerName = req.body.playerSearchTerm;
     let playerStatData = await playerData.getPlayerIdMap();
     let playerId = playerStatData[playerName];
     let playerStats = await playerData.getPlayerStatistics(playerId);
-    // const showDataResults = Object.entries(showData).slice(0,5).map(entry => entry[1])
 
     res.render("playersearchresult", {
       title: playerName,

@@ -2,6 +2,9 @@
     <div class="container">
         <div class="item">
             <h1>{{title}}</h1>
+            {{#if msg}}
+                <p id="error-not-found">{{msg}}</p>
+            {{/if}}
             <p>
                 Enter a player name to search for their stats
             </p>
