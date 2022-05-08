@@ -260,7 +260,8 @@ router.get("/myprofile/myteam", async (req, res) => {
   }
   try {
     let { username } = await userData.getUser(req.session.user.uid);
-    // for getTeam ... team1 ... team2 ... for player in team ... player1 ... player2
+
+
     res.render("myteam", {
       username: username,
       team: 'playerOne',
@@ -271,7 +272,24 @@ router.get("/myprofile/myteam", async (req, res) => {
   }
 });
 
+router.post("/myprofile/addplayer", async (req, res) => {
+  if (!req.session.user) {
+    res.status(403);
+    return;
+  }
+  try {
+    let { username } = await userData.getUser(req.session.user.uid);
+    let playerTerm = req.body.playerAddTerm
 
+    res.render("myteam", {
+      username: username,
+      team: playerTerm,
+      title: `${username}'s team`,
+    });
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
 
 
 module.exports = router;

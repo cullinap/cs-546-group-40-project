@@ -27,8 +27,6 @@ npm start
 - Make a user profile
 - Check some news
 
-
-
 @TODO
 - Landing Page
 - AJAX form submission
@@ -46,25 +44,36 @@ npm start
 - Add watch matches page
 - Add ajax functionality
 - Add css
-- 
 - Extras: add discussion board, add predictive service
 
+### Project Map
+
 ##### Routes:
-- GET "/"
-    - root route 
-- GET "/player"
-    - search for individual players
-- POST "/searchplayers"
-    - individual player page
-- GET "/signup"
-- POST "/signup"
-- POST "/login"
-- GET "/private"
-- GET "/logout"
+- auth
+    - POST "/login"
+    - GET "/signup"
+    - POST "/signup"
+    - GET "/logout"
+- home
+    - GET "/"
+        - root route 
+- news 
+    - handled on client side
+- profile
+    - GET "/myprofile"
+    - POST "/myprofile/changepfp"
+    - POST "/myprofile/changename"
+    - POST "/myprofile/changeusn"
+    - POST "/myprofile/changepwd"
+    - POST "/myprofile/changeem"
+    - GET "/myprofile/myteam"
+    - POST "/myprofile/addplayer"
+- players 
+    - GET "/playersearch"
+    - POST "/searchplayers"
 - GET "/playerrank"
 - GET "/watchmatches"
 - GET "/matchtickets"
-- GET "/latestnews"
 
 ##### Data:
 
