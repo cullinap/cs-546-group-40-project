@@ -5,7 +5,7 @@ var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
 
 
-router.get("/createteam", async (req, res) => {
+router.get("/teamcreator", async (req, res) => {
     try {
       res.render("createteam", {
         title: 'create a team'
