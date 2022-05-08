@@ -1,20 +1,28 @@
 <div class="container">
-    <div class="item">
-        <h1>{{title}}</h1>
-        <h2>{{playerSearchTerm}}</h2>
-        <section>
-          <div class="left">
-            <img id="img" alt="{{playerSearchTerm}}" src="{{playerPhoto.href}}"/> 
-          </div>
-           <ul>
-               <li>{{playerWeight}}</li>
-               <li>{{playerAge}}</li>
-               <li>{{playerCareerLength.years}}</li>
-               <li>College</li>
-               <li>Birthplace</li>
-           </ul>
-        </section>
-        <a href="/">Go back home</a>
-        <a href="/playersearch">Make another search</a>
-    </div>    
+  <div class="item">
+    <h1>{{player.displayName}}</h1>
+    <section>
+      <div class="left">
+        {{#if player.headshot}}
+          <img
+            id="img"
+            alt="{{player.playerName}}"
+            src="{{player.headshot.href}}"
+          />
+        {{else}}
+          <img id="img" src="/public/img/no_image.jpeg" />
+        {{/if}}
+      </div>
+      <ul>
+        <li>Weight: {{player.displayWeight}}</li>
+        <li>Height: {{player.displayHeight}}</li>
+        <li>Age: {{player.age}}</li>
+        <li>Career Length: {{player.experience.years}}</li>
+        <li>College: {{college}}</li>
+        <li>Birthplace: {{player.birthPlace.city}}</li>
+      </ul>
+    </section>
+    <a href="/">Go back home</a>
+    <a href="/playersearch">Make another search</a>
+  </div>
 </div>

@@ -3,14 +3,14 @@ const mongoCollections = require("../config/mongoCollections");
 const playerData = mongoCollections.player_data;
 const { ObjectId } = require("mongodb");
 
-const playerIDMaps = 
- "https://cullinap.github.io/data_sources/player_id_map.json"
+const playerIDMaps =
+  "https://cullinap.github.io/data_sources/player_id_map.json";
 
-const playerDataUrl = 
-  "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
+const playerDataUrl =
+  "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/";
 
-const scoringLeaderUrl = 
-  "https://site.api.espn.com/apis/site/v3/sports/football/nfl/leaders?season=2021"
+const scoringLeaderUrl =
+  "https://site.api.espn.com/apis/site/v3/sports/football/nfl/leaders?season=2021";
 
 async function getApiData(url) {
   let { data } = await axios.get(url);
@@ -19,14 +19,14 @@ async function getApiData(url) {
 
 module.exports = {
   async getPlayerIdMap() {
-    let apiData = await getApiData(playerIDMaps)
-    return apiData
+    let apiData = await getApiData(playerIDMaps);
+    return apiData;
   },
-  
+
   async getPlayerStatistics(playerId) {
-    let indPlayerUrl = playerDataUrl + playerId
-    let apiData = await getApiData(indPlayerUrl)
-    return apiData
+    let indPlayerUrl = playerDataUrl + playerId;
+    let apiData = await getApiData(indPlayerUrl);
+    return apiData;
   },
 
   async mapEspnIdToPlayer(espnid, firstName, lastName) {
@@ -35,40 +35,52 @@ module.exports = {
     let player = {
       espnid: espnid,
       firstName: firstName,
-      lastName: lastName
-    }
+      lastName: lastName,
+    };
 
     const insertInfo = await playerCollection.insertOne(player);
     return player;
   },
 
   async getScoringLeaders() {
-    const scoringLeaders = await getApiData(scoringLeaderUrl)
-    return scoringLeaders
+    const scoringLeaders = await getApiData(scoringLeaderUrl);
+    return scoringLeaders;
+  },
+
+  async getCollege(href) {
+    const college = await getApiData(href);
+    return college;
   },
 
   async scoringLeaders() {
-    const scoringLeaders = await getApiData(scoringLeaderUrl)
-    let categories = scoringLeaders['leaders']['categories']
+    const scoringLeaders = await getApiData(scoringLeaderUrl);
+    let categories = scoringLeaders["leaders"]["categories"];
     // console.log(scoringLeader['leaders']['categories'][0]['leaders'][0]['athlete']['displayName'])
 
-    let obj = {}
-    for(let i=0; i<=10; ++i) {
-        let subList = []
-        for(let j=1; j<=5; ++j) {
-            subList.push(
-                categories[i]['leaders'][j]['athlete']['displayName']
-            )
-        }
-        obj[categories[i]['name']] = subList
+    let obj = {};
+    for (let i = 0; i <= 10; ++i) {
+      let subList = [];
+      for (let j = 1; j <= 5; ++j) {
+        subList.push(categories[i]["leaders"][j]["athlete"]["displayName"]);
+      }
+      obj[categories[i]["name"]] = subList;
     }
 
-    return obj
-  }, 
+    return obj;
+  },
 
-  async createPlayer(firstName, lastName, debutYear, headshotPicture, position, profilePicture, teamId, playerRanking) {
+  async createPlayer(
+    firstName,
+    lastName,
+    debutYear,
+    headshotPicture,
+    position,
+    profilePicture,
+    teamId,
+    playerRanking
+  ) {
     const playerCollection = await playerData();
-    const player_data = await playerNameIdMap()
+    const player_data = await playerNameIdMap();
 
     let newPlayer = {
       firstName: firstName,
