@@ -1,24 +1,24 @@
 <article>
-    {{#if team}}
-        <p id="player_one">{{team}}</p>
-    {{else}}
-        <p id="player_one">None</p>
-    {{/if}}
-
-    <div class="container">
-        <div class="item">
-            <h1>{{title}}</h1>
-            <p>
-                Add a player
-            </p>
-            <form method="POST" action="/myprofile/addplayer">
-                <label class="label" for="search"> Enter a player name:
-                    <input type="text" id="search" name="playerAddTerm">
-                </label>
-                <button class="button" type="submit" >search</button>
-            </form>
-        </div>
+  {{#if team}}
+    <p id="player_one">{{team}}</p>
+  {{else}}
+    <p id="player_one">None</p>
+  {{/if}}
+  <div class="container">
+    <div class="item">
+      <h1>{{title}}</h1>
+      <p>
+        Add a player
+      </p>
+      <form method="POST" action="/myprofile/addplayer">
+        <label class="label" for="search">
+          Enter a player name:
+          <input type="text" id="search" name="playerAddTerm" />
+        </label>
+        <button class="button" type="submit">search</button>
+      </form>
     </div>
+  </div>
 </article>
 
 <a href="/myprofile">My Profile</a>

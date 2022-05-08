@@ -1,98 +1,167 @@
 <article>
-  {{#if pfp}}
-    <img id="myprofile-pfp" src="{{pfp}}" />
-  {{else}}
-    <img id="myprofile-pfp" src="/public/img/no_image.jpeg" />
-  {{/if}}
-  <h1>Name</h1>
-  {{#if firstname}}
-    <p id="myprofile-name">{{firstname}} {{lastname}}</p>
-  {{else}}
-    <p id="myprofile-name">None</p>
-  {{/if}}
-  <h1>Username</h1>
-  <p id="myprofile-usn">{{username}}</p>
-  <h1>Email</h1>
-  <p id="myprofile-em">{{email}}</p>
-  <h1>Posts</h1>
-  {{#if posts}}
-    <ul>
-      {{#each posts}}
-        <li><a href="/forum/discussion/{{discussionId}}">{{content}}</a></li>
-      {{/each}}
-    </ul>
-  {{else}}
-    <p>None</p>
-  {{/if}}
-  <h1>Teams</h1>
-  {{#if teams}}
-    <ul>
-      {{#each teams}}
-        <li>{{name}}</li>
-      {{/each}}
-    </ul>
-  {{else}}
-    <p>None</p>
-  {{/if}}
-  <div id="myprofile-changepfp" hidden>
-    <form id="pfp-form">
-      <label for="pfpurl">Enter your new profile picture's URL:</label>
-      <input type="text" name="pfpurl" id="pfpurl" placeholder="URL" />
-      <button type="submit">Submit</button>
-    </form>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {{#if pfp}}
+          <img
+            id="myprofile-pfp"
+            alt="Profile Picture"
+            class="profile-img"
+            src="{{pfp}}"
+          />
+        {{else}}
+          <img
+            id="myprofile-pfp"
+            alt="Profile Picture"
+            class="profile-img"
+            src="/public/img/no_image.jpeg"
+          />
+        {{/if}}
+      </div>
+      <div class="col">
+        <h2 class="text">Name</h2>
+        {{#if firstname}}
+          <p id="myprofile-name" class="text">{{firstname}} {{lastname}}</p>
+        {{else}}
+          <p id="myprofile-name" class="text">None</p>
+        {{/if}}
+        <h2 class="text" class="text">Username</h2>
+        <p id="myprofile-usn" class="text">{{username}}</p>
+        <h2 class="text" class="text">Email</h2>
+        <p id="myprofile-em" class="text">{{email}}</p>
+      </div>
+      <div class="col">
+        <div class="row mb-3 text">
+          <a href="/" class="btn btn-primary text">Home</a>
+          <a href="/logout" class="btn btn-primary text">Logout</a>
+        </div>
+        <div class="row">
+          <button id="myprofile-pfpButton" class="btn btn-primary text">Change
+            Profile Picture</button>
+        </div>
+        <div class="row">
+          <button id="myprofile-nameButton" class="btn btn-primary text">Change
+            Name</button>
+        </div>
+        <div class="row">
+          <button id="myprofile-usnButton" class="btn btn-primary text">Change
+            Username</button>
+        </div>
+        <div class="row">
+          <button id="myprofile-emButton" class="btn btn-primary text">Change
+            Email</button>
+        </div>
+        <div class="row">
+          <button id="myprofile-pwdButton" class="btn btn-primary text">Change
+            Password</button>
+        </div>
+      </div>
+      <div class="col">
+        <h2 class="text">Posts</h2>
+        {{#if posts}}
+          <ul>
+            {{#each posts}}
+              <li><a
+                  href="/forum/discussion/{{discussionId}}"
+                  class="text"
+                >{{content}}</a></li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p class="text">None</p>
+        {{/if}}
+        <h2 class="text">Teams</h2>
+        {{#if teams}}
+          <ul>
+            {{#each teams}}
+              <li class="text">{{name}}</li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <p class="text">None</p>
+        {{/if}}
+      </div>
+      <div class="row align-items-center">
+        <div class="col">
+          <div id="myprofile-changepfp" hidden>
+            <form id="pfp-form">
+              <label for="pfpurl" class="text">Enter your new profile picture's
+                URL:</label>
+              <input
+                type="text"
+                name="pfpurl"
+                id="pfpurl"
+                placeholder="URL"
+                class="text"
+              />
+              <button type="submit" class="text">Submit</button>
+            </form>
+          </div>
+          <div id="myprofile-changename" hidden>
+            <form id="name-form">
+              <label for="firstname" class="text">Enter your first name:</label>
+              <input
+                type="text"
+                name="firstname"
+                id="firstname"
+                placeholder="First name"
+                class="text"
+              />
+              <label for="lastname" class="text">Enter your last name:</label>
+              <input
+                type="text"
+                name="lastname"
+                id="lastname"
+                placeholder="Last name"
+                class="text"
+              />
+              <button type="submit" class="text">Submit</button>
+            </form>
+          </div>
+          <div id="myprofile-changeusername" hidden>
+            <form id="usn-form">
+              <label for="username" class="text">Enter your new username:</label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Username"
+                class="text"
+              />
+              <button type="submit" class="text">Submit</button>
+            </form>
+          </div>
+          <div id="myprofile-changeemail" hidden>
+            <form id="em-form">
+              <label for="email" class="text">Enter your new email:</label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                placeholder="Email"
+                class="text"
+              />
+              <button type="submit" class="text">Submit</button>
+            </form>
+          </div>
+          <div id="myprofile-changepassword" hidden>
+            <form id="pwd-form">
+              <label for="password" class="text">Enter your new password:</label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Password"
+                class="text"
+              />
+              <button type="submit" class="text">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div id="myprofile-changename" hidden>
-    <form id="name-form">
-      <label for="firstname">Enter your first name:</label>
-      <input
-        type="text"
-        name="firstname"
-        id="firstname"
-        placeholder="First name"
-      />
-      <label for="lastname">Enter your last name:</label>
-      <input
-        type="text"
-        name="lastname"
-        id="lastname"
-        placeholder="Last name"
-      />
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-  <div id="myprofile-changeusername" hidden>
-    <form id="usn-form">
-      <label for="username">Enter your new username:</label>
-      <input type="text" name="username" id="username" placeholder="Username" />
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-  <div id="myprofile-changeemail" hidden>
-    <form id="em-form">
-      <label for="email">Enter your new email:</label>
-      <input type="text" name="email" id="email" placeholder="Email" />
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-  <div id="myprofile-changepassword" hidden>
-    <form id="pwd-form">
-      <label for="password">Enter your new password:</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        placeholder="Password"
-      />
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-  <button id="myprofile-pfpButton">Change Profile Picture</button>
-  <button id="myprofile-nameButton">Change Name</button>
-  <button id="myprofile-usnButton">Change Username</button>
-  <button id="myprofile-emButton">Change Email</button>
-  <button id="myprofile-pwdButton">Change Password</button>
-  <a href="/">Home</a>
-  <a href="/logout">Logout</a>
+
   <script
     src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
