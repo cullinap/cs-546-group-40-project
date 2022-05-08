@@ -22,16 +22,18 @@ body {
 
 .alert-text {
     text-align: center;
-
 }
+
 .nav-item{
   border-bottom: 2px solid #333333;
   margin: 0px;
    padding: 0px;
 }
+
 .nav-item a{
   color: rgb(0, 0, 0)
 }
+
 .nav-item a:hover{
   color: rgb(1, 160, 160);
   
@@ -42,12 +44,15 @@ body {
 
   color:white;
 }
+
 .mb-2 input:focus{
   color: white;
 }
+
 .clip-header{
   text-align: center;
 }
+
 .footer{
   width: 100%;
   text-align: center;

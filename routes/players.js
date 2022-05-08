@@ -82,4 +82,19 @@ router.post("/searchplayers", async (req, res) => {
   }
 });
 
+router.get("/ladder", async (req, res) => {
+  try {
+    let nflLeaders = await playerData.scoringLeaders();
+    console.log(nflLeaders)
+
+    res.render("playerranking", {
+      title: "Latest News",
+      nflArticles: nflLeaders.receptions,
+    });
+  } catch (e) {
+    res.status(500).json({ error: e });
+    return;
+  }
+});
+
 module.exports = router;

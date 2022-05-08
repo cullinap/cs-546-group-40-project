@@ -97,7 +97,9 @@ async function testScoringLeaders() {
     for(let i=0; i<=10; ++i) {
         let subList = []
         for(let j=1; j<=5; ++j) {
-            subList.push(categories[i]['leaders'][j]['athlete']['displayName'])
+            subList.push(
+                categories[i]['leaders'][j]['athlete']['displayName']
+            )
         }
         obj[categories[i]['name']] = subList
     }
