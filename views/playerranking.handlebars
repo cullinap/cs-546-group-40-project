@@ -1,9 +1,50 @@
 <article>
-    <p>Latest NFL News</p>
-    {{#if nflArticles}}
+    <p>{{title}}</p>
+    <p>Passing Yards</p>
+    {{#if passingYards}}
     <ul>
-        {{#each nflArticles}}
-        <li><a href="{{links.web.href}}" target="_blank">{{headline}}</a></li>
+        {{#each passingYards}}
+            <li><p>{{this}}</p></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    <p>Rushing Yards</p>
+    {{#if rushingYards}}
+    <ul>
+        {{#each rushingYards}}
+            <li><p>{{this}}</p></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    <p>Receiving Yards</p>
+    {{#if receivingYards}}
+    <ul>
+        {{#each receivingYards}}
+            <li><p>{{this}}</p></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    <p>Sacks</p>
+    {{#if sacks}}
+    <ul>
+        {{#each sacks}}
+            <li><p>{{this}}</p></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    <p>Passing Touchdowns</p>
+    {{#if passingTouchdowns}}
+    <ul>
+        {{#each passingTouchdowns}}
+            <li><p>{{this}}</p></li>
+        {{/each}}
+    </ul>
+    {{/if}}
+    <p>Quarterback Rating</p>
+    {{#if quarterbackRating}}
+    <ul>
+        {{#each quarterbackRating}}
+            <li><p>{{this}}</p></li>
         {{/each}}
     </ul>
     {{/if}}

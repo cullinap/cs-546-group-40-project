@@ -84,16 +84,21 @@ router.post("/searchplayers", async (req, res) => {
 
 router.get("/ladder", async (req, res) => {
   try {
-    let nflLeaders = await playerData.scoringLeaders();
-    console.log(nflLeaders)
-
+    let nflLeaders;
+    nflLeaders = await playerData.scoringLeaders();
+    console.log(nflLeaders['receptions'])
+    
     res.render("playerranking", {
-      title: "Latest News",
-      nflArticles: nflLeaders.receptions,
+      title: "Top 5 players for each statistic",
+      passingYards: nflLeaders['passingYards'],
+      rushingYards: nflLeaders['rushingYards'],
+      receivingYards: nflLeaders['receivingYards'],
+      sacks: nflLeaders['sacks'],
+      passingTouchdowns: nflLeaders['passingTouchdowns'],
+      quarterbackRating: nflLeaders['quarterbackRating']
     });
   } catch (e) {
-    res.status(500).json({ error: e });
-    return;
+    res.status(404).json({ error: "Not Found" });
   }
 });
 
