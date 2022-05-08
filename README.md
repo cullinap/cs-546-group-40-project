@@ -53,10 +53,32 @@ npm start
 - Add watch matches page
 - Add ajax functionality
 - Add css
--
 - Extras: add discussion board, add predictive service
 
-##### Routes:
+### Project Map
+
+##### Routes
+- auth
+    - POST "/login"
+    - GET "/signup"
+    - POST "/signup"
+    - GET "/logout"
+- home
+    - GET "/"
+- news 
+    - handled on client side
+- profile
+    - GET "/myprofile"
+    - POST "/myprofile/changepfp"
+    - POST "/myprofile/changename"
+    - POST "/myprofile/changeusn"
+    - POST "/myprofile/changepwd"
+    - POST "/myprofile/changeem"
+    - GET "/myprofile/myteam"
+    - POST "/myprofile/addplayer"
+- players 
+    - GET "/playersearch"
+    - POST "/searchplayers"
 
 - GET "/"
   - root route
@@ -72,7 +94,6 @@ npm start
 - GET "/playerrank"
 - GET "/watchmatches"
 - GET "/matchtickets"
-- GET "/latestnews"
 
 ##### Data:
 
