@@ -36,7 +36,7 @@ module.exports = {
     if (!insertInfo.acknowledged || !insertInfo.insertedId) {
       throw "Could not add team to db";
     }
-    await userData.addTeam(ownerId, userTeam._id);
+    await userData.addTeam(ownerId, String(userTeam._id));
     return { teamInserted: true, teamId: userTeam._id };
   },
 

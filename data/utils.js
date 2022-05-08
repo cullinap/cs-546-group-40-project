@@ -12,7 +12,14 @@ async function getAllUsersIdAndName() {
 }
 
 async function getUserIdByName(username) {
-    if (username === undefined) throw 'provide a username';
+    if (!username) {
+      throw "ownerId is a required field";
+    }
+    username = username.trim()
+    if (typeof username != "string") {
+      throw "username must be a string";
+    }
+
     const usersCollection = await users();
     const user = await usersCollection.findOne({ username: username });
 
@@ -31,9 +38,24 @@ async function getAll() {
 }
 
 async function addTeam(id, team) {
+    if (!id) {
+      throw "ownerId is a required field";
+    }
+    if (!team) {
+      throw "ownerId is a required field";
+    }
+    ownerId = ownerId.trim();
+    team = teamId.trim();
+    if (!ObjectId.isValid(id)) {
+      throw "ownerId is not a valid id";
+    }
+    if (typeof team != "string") {
+      throw "username must be a string";
+    }
     const usersCollection = await users();
     const updateTeam = await usersCollection
         .updateOne({ _id: id }, { $push: { teams: team } })
+    return updateTeam
 }
 
 module.exports = {
