@@ -110,35 +110,6 @@ async function addPost(ownerId, postId) {
   return update.modifiedCount != 0;
 }
 
-async function removePost(ownerId, postId) {
-  if (!ownerId) {
-    throw "ownerId is a required field";
-  }
-  if (!postId) {
-    throw "postId is a required field";
-  }
-  if (typeof ownerId != "string") {
-    throw "ownerId must be a string";
-  }
-  if (typeof postId != "string") {
-    throw "postId must be a string";
-  }
-  ownerId = ownerId.trim();
-  postId = postId.trim();
-  if (!ObjectId.isValid(ownerId)) {
-    throw "ownerId is not a valid id";
-  }
-  if (!ObjectId.isValid(postId)) {
-    throw "postId is not a valid id";
-  }
-  const usersCollection = await users();
-  const update = await usersCollection.updateOne(
-    { _id: ObjectId(ownerId) },
-    { $pull: { posts: postId } }
-  );
-  return update.modifiedCount != 0;
-}
-
 async function addTeam(ownerId, teamId) {
   if (!ownerId) {
     throw "ownerId is a required field";
@@ -403,7 +374,6 @@ module.exports = {
   updateUserUsn,
   updateUserName,
   addPost,
-  removePost,
   addTeam,
   removeTeam,
   getUserData,

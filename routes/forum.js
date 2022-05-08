@@ -104,6 +104,7 @@ router.post("/forum/addpost", async (req, res) => {
       uid,
       postContent
     );
+    await userData.addPost(uid, response.toString());
     if (response) {
       res.status(200).send("Successfully created post.");
     } else {

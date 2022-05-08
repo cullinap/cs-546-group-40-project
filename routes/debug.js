@@ -3,14 +3,10 @@ const router = express.Router();
 const { userData, discussionData } = require("../data");
 const { ObjectId } = require("mongodb");
 
-router.get("/addpost", async (req, res) => {
+router.get("/getpost", async (req, res) => {
   try {
-    await discussionData.addPostToDiscussion(
-      "627723c63013ee47634ba478",
-      "6274cbb6cc25fc1c498d3b04",
-      "Big Dogs ball out yo."
-    );
-    res.status(200).send("OK");
+    let resp = await discussionData.getPost("627777d2e6ab3bcfd73d830b");
+    res.status(200).json(resp);
   } catch (e) {
     res.status(500).send(e);
   }

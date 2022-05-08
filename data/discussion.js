@@ -83,7 +83,9 @@ async function addPostToDiscussion(discussionId, postOwnerId, postContent) {
     { _id: ObjectId(discussionId) },
     { $push: { posts: newPost } }
   );
-  return update.modifiedCount != 0;
+  if (update.modifiedCount != 0) {
+    return newPost._id;
+  }
 }
 
 async function getDiscussion(discussionId) {
@@ -132,10 +134,34 @@ async function getMostRecentPosts() {
   }
 }
 
+async function getPost(postId) {
+  if (!postId) {
+    throw "postId is a required field";
+  }
+  if (typeof postId != "string") {
+    throw "postId must be a string";
+  }
+  postId = postId.trim();
+  if (!ObjectId.isValid(postId)) {
+    throw "postId is not valid";
+  }
+  const discussionCollection = await discussions();
+  const response = await discussionCollection
+    .find({
+      "posts._id": ObjectId(postId),
+    })
+    .toArray();
+  if (!response) {
+    throw "Post not found";
+  }
+  return response[0].posts[0];
+}
+
 module.exports = {
   createDiscussion,
   addPostToDiscussion,
   getDiscussion,
   getAllDiscussions,
   getMostRecentPosts,
+  getPost,
 };
