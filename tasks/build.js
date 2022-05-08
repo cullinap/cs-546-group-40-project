@@ -88,5 +88,23 @@ async function playerBuild() {
     await connection.closeConnection();
 }
 
+async function testScoringLeaders() {
+    let scoringLeader = await playerData.getScoringLeaders()
+    let categories = scoringLeader['leaders']['categories']
+    // console.log(scoringLeader['leaders']['categories'][0]['leaders'][0]['athlete']['displayName'])
+
+    let obj = {}
+    for(let i=0; i<=10; ++i) {
+        let subList = []
+        for(let j=1; j<=5; ++j) {
+            subList.push(categories[i]['leaders'][j]['athlete']['displayName'])
+        }
+        obj[categories[i]['name']] = subList
+    }
+
+    console.log(obj)
+}
+
 //userBuild() 
-playerBuild()
+//playerBuild()
+testScoringLeaders()

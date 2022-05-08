@@ -9,11 +9,13 @@ const playerIDMaps =
 const playerDataUrl = 
   "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/athletes/"
 
+const scoringLeaderUrl = 
+  "https://site.api.espn.com/apis/site/v3/sports/football/nfl/leaders?season=2021"
+
 async function getApiData(url) {
   let { data } = await axios.get(url);
   return data;
 }
-
 
 module.exports = {
   async getPlayerIdMap() {
@@ -38,6 +40,11 @@ module.exports = {
 
     const insertInfo = await playerCollection.insertOne(player);
     return player;
+  },
+
+  async getScoringLeaders() {
+    const scoringLeaders = await getApiData(scoringLeaderUrl)
+    return scoringLeaders
   },
 
   async createPlayer(firstName, lastName, debutYear, headshotPicture, position, profilePicture, teamId, playerRanking) {

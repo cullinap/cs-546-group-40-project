@@ -1,20 +1,27 @@
 <article>
-    <div class="container">
-        <div class="item">
-            <h1>{{title}}</h1>
-            {{#if msg}}
-                <p id="error-not-found">{{msg}}</p>
-            {{/if}}
-            <p>
-                Enter a player name to search for their stats
-            </p>
-            <form method="POST" action="/searchplayers">
-                <label class="label" for="search"> Enter a player name:
-                    <input type="text" id="search" name="playerSearchTerm">
-                </label>
-                <button class="button" type="submit" >search</button>
-            </form>
+  <div class="container" id="forum">
+    <div class="row mb-2">
+      <div class="nav justify-content-center">
+        <div class="nav-item">
+          <a class="nav-link active text" href="/">Back to home</a>
         </div>
+        <h1>{{title}}</h1>
+        {{#if msg}}
+          <p id="error-not-found">{{msg}}</p>
+        {{/if}}
+        <div class="col">
+        <p>
+          Enter a player name to search for their stats
+        </p>
+        </div>
+        <form method="POST" action="/searchplayers">
+          <label class="label" for="search">
+            Enter a player name:
+            <input type="text" id="search" name="playerSearchTerm" />
+          </label>
+          <button class="button" type="submit">search</button>
+        </form>
+      </div>
     </div>
+  </div>
 </article>
-<a href="/">Go back home</a>
