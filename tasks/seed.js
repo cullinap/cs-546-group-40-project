@@ -30,19 +30,19 @@ async function userSeed() {
 
         // create a team 
         let teamOne = await userTeamData.createTeam(
-            oneId, 'teamOne', ['Aaron Rodgers','Corey Dillon']
+            String(oneId), 'teamOne', ['Aaron Rodgers','Corey Dillon']
         )
 
         let teamTwo = await userTeamData.createTeam(
-            twoId, 'teamDos', ['Patrick Mahomes','Rob Gronk']
+            String(twoId), 'teamDos', ['Patrick Mahomes','Rob Gronk']
         )
 
-        let addTeamToUserOne = await utilData.addTeam(
-            oneId, teamOne
+        let addTeamToUserOne = await userData.addTeam(
+            String(oneId), String(teamOne._id)
         )
 
-        let addTeamToUserTwo = await utilData.addTeam(
-            twoId, teamTwo
+        let addTeamToUserTwo = await userData.addTeam(
+            String(twoId), String(teamTwo._id)
         )
 
         let addDiscussion = await discussionData.createDiscussion(
