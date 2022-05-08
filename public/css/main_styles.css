@@ -1,5 +1,7 @@
 body {
   background-color: beige;
+  font-family: Georgia, 'Cambria','Times New Roman', Times, serif;
+
 }
 
 #main-header {
@@ -7,6 +9,7 @@ body {
   text-align: center;
   margin: 15px;
 }
+
 
 .subheadings {
     font-size: 35px;
