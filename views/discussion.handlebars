@@ -1,5 +1,4 @@
 <article>
-  <a href="/forum">Back to discussion list</a>
   <div id="discussion-div">
     <h2>{{title}}</h2>
     {{#if posts}}
@@ -7,14 +6,21 @@
         {{#each posts}}
           <li>
             {{#if ownerPfp}}
-              <img id="discussion-post-author-pfp" src="{{ownerPfp}}" />
+              <img
+                id="discussion-post-author-pfp"
+                alt="Profile Picture"
+                class="profile-img"
+                src="{{ownerPfp}}"
+              />
             {{else}}
               <img
                 id="discussion-post-author-pfp"
+                class="profile-img"
+                alt="Profile Picture"
                 src="/public/img/no_image.jpeg"
               />
             {{/if}}
-            <p id="discussion-post-author">{{ownerUsn}}</p>
+            <p id="discussion-post-author">Author: {{ownerUsn}}</p>
             <p>{{content}}</p>
             <p>{{date}}</p>
           </li>
