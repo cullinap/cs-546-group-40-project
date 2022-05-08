@@ -11,5 +11,16 @@
       {{/each}}
     </ul>
   {{/if}}
+  {{#if nbc}}
+    <h2>NBC Sports</h2>
+    <ul>
+      {{#each nbc}}
+        <li><a
+            href="https://youtu.be/{{id.videoId}}"
+            target="_blank"
+          >{{snippet.title}}</a></li>
+      {{/each}}
+    </ul>
+  {{/if}}
 </article>
 <a href="/">Go back home</a>
