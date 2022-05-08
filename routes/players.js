@@ -22,7 +22,7 @@ function formatNames(name) {
 
 router.get("/playersearch", async (req, res) => {
   try {
-    res.render("playerfinder");
+    res.render("playerfinder", {title: "Player Finder"});
   } catch (e) {
     res.status(404).json({ error: "Not Found" });
   }
