@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { playerData } = require("../data");
+var xss = require("xss");
 
 function checkInput(value) {
   if(value.trim().length === 0) 
@@ -13,6 +14,16 @@ function checkApiValues(value) {
       return 'N/A'
   return value
 }
+
+function formatNames(name) {
+  name = name.split(' ')
+  first = name[0][0].toUpperCase() + name[0].substring(1)
+  last = name[1][0].toUpperCase() + name[1].substring(1)
+
+  return first + " " + last
+}
+
+console.log(formatNames("khalid dj"))
 
 function checkPlayerImage(img) {
   if(!img)
@@ -36,9 +47,16 @@ router.post("/searchplayers", async (req, res) => {
   }
   
   try {
-    const playerName = req.body.playerSearchTerm;
+    const searchInput = xss(req.body.playerSearchTerm)
+    const playerName = formatNames(searchInput);
     let playerStatData = await playerData.getPlayerIdMap();
     let playerId = playerStatData[playerName];
+    if(!playerId){
+      res.status(400).render(
+        'playerfinder', 
+        {msg: 'player not found'})
+    }
+
     let playerStats = await playerData.getPlayerStatistics(playerId);
 
     res.render("playersearchresult", {
