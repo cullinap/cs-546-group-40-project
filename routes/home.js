@@ -1,4 +1,5 @@
 const express = require("express");
+const { vidData } = require("../data");
 const router = express.Router();
 
 router.get("/", async (req, res) => {

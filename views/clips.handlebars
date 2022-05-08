@@ -1,0 +1,15 @@
+<article>
+  <p>Recent Matches and Clips</p>
+  {{#if espn}}
+    <h2>ESPN</h2>
+    <ul>
+      {{#each espn}}
+        <li><a
+            href="https://youtu.be/{{id.videoId}}"
+            target="_blank"
+          >{{snippet.title}}</a></li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</article>
+<a href="/">Go back home</a>
