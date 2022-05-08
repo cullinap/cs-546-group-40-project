@@ -1,33 +1,42 @@
 # group 40 project: Fantasy Sports Tracker
 
+## Description
+
 This website functions as a fantasy sports tracker. Users can create a profile that enables them to look at the latest news in their chosen sport. Users will be able to use this website as a guide to their fantasy league by utilizing the player ranking section as well as the individual player statistics page. All data will be taken from publicly available API.
 
 #### Setup
-Clone the repo: 
-```console 
-git clone <repourl> 
+
+Clone the repo:
+
+```console
+git clone <repourl>
 ```
 
-install dependencies 
-```console 
-npm i 
+install dependencies
+
+```console
+npm i
 ```
 
-run the db seed 
-```console 
+run the db seed
+
+```console
 npm run seed
 ```
 
 run the repo locally:
-```console 
+
+```console
 npm start
 ```
 
 #### Usage
+
 - Make a user profile
 - Check some news
 
 @TODO
+
 - Landing Page
 - AJAX form submission
 - Defense against XSS attacks
@@ -48,7 +57,7 @@ npm start
 
 ### Project Map
 
-##### Routes:
+##### Routes
 - auth
     - POST "/login"
     - GET "/signup"
@@ -56,7 +65,6 @@ npm start
     - GET "/logout"
 - home
     - GET "/"
-        - root route 
 - news 
     - handled on client side
 - profile
@@ -71,6 +79,18 @@ npm start
 - players 
     - GET "/playersearch"
     - POST "/searchplayers"
+
+- GET "/"
+  - root route
+- GET "/player"
+  - search for individual players
+- POST "/searchplayers"
+  - individual player page
+- GET "/signup"
+- POST "/signup"
+- POST "/login"
+- GET "/private"
+- GET "/logout"
 - GET "/playerrank"
 - GET "/watchmatches"
 - GET "/matchtickets"
@@ -84,6 +104,7 @@ npm start
 - posts (subdocument)
 
 ##### Team
+
 - Sean
-- Jacob 
+- Jacob
 - Patrick
