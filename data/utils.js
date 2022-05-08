@@ -23,6 +23,13 @@ async function getUserIdByName(username) {
     return user._id
 }
 
+async function getAll() {
+  const userTeamCollection = await userTeamData();
+  const userList = await userTeamCollection.find({}).toArray();
+
+  return userList;
+}
+
 async function addTeam(id, team) {
     const usersCollection = await users();
     const updateTeam = await usersCollection
