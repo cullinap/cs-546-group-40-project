@@ -55,8 +55,7 @@ router.post("/profile/changepfp", async (req, res) => {
     res.status(400).send("Profile picture URL is not a string");
     return;
   }
-  pfpUrl = xss(pfpUrl);
-  pfpUrl = pfpUrl.trim();
+  pfpUrl = xss(pfpUrl.trim());
   uid = uid.trim();
   if (!ObjectId.isValid(uid)) {
     res.status(400).send("uid is not a valid id");
@@ -107,10 +106,8 @@ router.post("/profile/changename", async (req, res) => {
     res.status(400).send("Last name is not a string");
     return;
   }
-  firstname = xss(firstname);
-  lastname = xss(lastname);
-  firstname = firstname.trim();
-  lastname = lastname.trim();
+  firstname = xss(firstname.trim());
+  lastname = xss(lastname.trim());
   uid = uid.trim();
   if (!ObjectId.isValid(uid)) {
     res.status(400).send("uid is not a valid id");

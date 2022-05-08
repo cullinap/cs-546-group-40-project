@@ -35,7 +35,6 @@ router.post("/forum/creatediscussion", async (req, res) => {
     return;
   }
   let { topic } = req.body;
-  topic = xss(topic);
   if (!topic) {
     res.status(400).send("topic is a required field");
     return;
@@ -44,7 +43,7 @@ router.post("/forum/creatediscussion", async (req, res) => {
     res.status(400).send("topic must be a string");
     return;
   }
-  topic = topic.trim();
+  topic = xss(topic.trim());
   try {
     let response = await discussionData.createDiscussion(uid, topic);
     if (response) {
@@ -78,7 +77,6 @@ router.post("/forum/addpost", async (req, res) => {
     return;
   }
   let { discussionId, postContent } = req.body;
-  postContent = xss(postContent);
   if (!discussionId) {
     res.status(400).send("discussionId is a required field");
     return;
@@ -100,7 +98,7 @@ router.post("/forum/addpost", async (req, res) => {
     res.status(400).send("postContent must be a string");
     return;
   }
-  postContent = postContent.trim();
+  postContent = xss(postContent.trim());
   try {
     let response = await discussionData.addPostToDiscussion(
       discussionId,

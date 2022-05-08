@@ -1,7 +1,6 @@
 body {
   background-color: beige;
   font-family: Georgia, 'Cambria','Times New Roman', Times, serif;
-
 }
 
 #main-header {
@@ -41,7 +40,6 @@ body {
 
 .mb-2 input{
   background: linear-gradient(to top, rgba(30, 30, 30, 0.8)50%,rgba(30, 30, 30, 0.8)50%);
-
   color:white;
 }
 
@@ -66,4 +64,10 @@ body {
 .footer h4{
   margin-bottom: 25px;
   margin-top: 20px;
+}
+
+.profile-img {
+  width: 300px;
+  height: 300px;
+  border-radius: 300px;
 }

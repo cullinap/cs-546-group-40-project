@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { userData } = require("../data");
 var validator = require("email-validator");
+var xss = require("xss");
 
 // Login, Logout, Signup
 
@@ -64,7 +65,7 @@ router.post("/signup", async (req, res) => {
     if (typeof password != "string") {
       throw "Password must be a string";
     }
-    email = email.trim().toLowerCase();
+    email = xss(email.trim().toLowerCase());
     password = password.trim().toLowerCase();
     if (password.length < 6) {
       throw "Password should be more than 6 characters";
