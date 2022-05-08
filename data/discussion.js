@@ -25,6 +25,7 @@ async function createDiscussion(ownerId, topic) {
     await userData.getUser(ownerId);
     const discussionCollection = await discussions();
     const newDiscussionInfo = {
+      _id: ObjectId(),
       ownerId: ObjectId(ownerId),
       topic: topic,
       posts: [],
@@ -36,7 +37,7 @@ async function createDiscussion(ownerId, topic) {
     if (!insertDiscussion.acknowledged || !insertDiscussion.insertedId) {
       throw "Could not add discussion to db";
     }
-    return { discussionInserted: true };
+    return { discussionId: newDiscussionInfo._id };
   } catch (e) {
     throw e;
   }
@@ -131,84 +132,9 @@ async function getMostRecentPosts() {
   }
 }
 
-async function removePostFromDiscussion(discussionId, postId) {
-  if (!discussionId) {
-    throw "discussionId is a required field";
-  }
-  if (typeof discussionId != "string") {
-    throw "discussionId must be a string";
-  }
-  discussionId = discussionId.trim();
-  if (!ObjectId.isValid(discussionId)) {
-    throw "discussionId is not valid";
-  }
-  if (!postId) {
-    throw "postId is a required field";
-  }
-  if (typeof postId != "string") {
-    throw "postId must be a string";
-  }
-  postId = postId.trim();
-  if (!ObjectId.isValid(postId)) {
-    throw "postId is not valid";
-  }
-  const discussionCollection = await discussions();
-  const update = await discussionCollection.updateOne(
-    { _id: ObjectId(discussionId) },
-    { $pull: { posts: { _id: { $eq: ObjectId(postId) } } } }
-  );
-  return update.modifiedCount != 0;
-}
-
-async function removeDiscussion(ownerId, discussionId) {
-  if (!ownerId) {
-    throw "ownerId is a required field";
-  }
-  if (typeof ownerId != "string") {
-    throw "ownerId must be a string";
-  }
-  if (!discussionId) {
-    throw "discussionId is a required field";
-  }
-  if (typeof discussionId != "string") {
-    throw "discussionId must be a string";
-  }
-  ownerId = ownerId.trim();
-  discussionId = discussionId.trim();
-  if (!ObjectId.isValid(ownerId)) {
-    throw "ownerId is not valid";
-  }
-  if (!ObjectId.isValid(discussionId)) {
-    throw "discussionId is not valid";
-  }
-  const discussionCollection = await discussions();
-  const discussion = await discussionCollection.findOne({
-    $and: [
-      {
-        ownerId: ObjectId(ownerId),
-      },
-      {
-        _id: ObjectId(discussionId),
-      },
-    ],
-  });
-  if (!discussion) {
-    throw "User cannot delete discussion";
-  }
-  const deletion = await discussionCollection.deleteOne({
-    _id: ObjectId(discussionId),
-  });
-  if (deletion.deletedCount == 0) {
-    throw "Discussion could not be deleted";
-  }
-  return { discussionRemoved: true };
-}
-
 module.exports = {
   createDiscussion,
-  removeDiscussion,
   addPostToDiscussion,
-  removePostFromDiscussion,
   getDiscussion,
   getAllDiscussions,
   getMostRecentPosts,

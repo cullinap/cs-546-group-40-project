@@ -1,4 +1,37 @@
 (function ($) {
+  forumInterface = $("#forum");
+  createDiscButton = $("#forum-cd-button");
+  newDiscussionFormDiv = $("#forum-newdisc-form");
+  newDiscussionForm = $("#newdisc-form");
+  cancelDiscButton = $("#forum-cd-cancel-button");
+
+  function clickCreateButton(event) {
+    event.preventDefault();
+    forumInterface.attr("hidden", true);
+    newDiscussionFormDiv.removeAttr("hidden");
+  }
+  function clickCancelButton(event) {
+    event.preventDefault();
+    forumInterface.removeAttr("hidden");
+    newDiscussionFormDiv.attr("hidden", true);
+  }
+  createDiscButton.bind("click", clickCreateButton);
+  cancelDiscButton.bind("click", clickCancelButton);
+  newDiscussionForm.bind("submit", (event) => {
+    event.preventDefault();
+    let topic = $("#topic").val();
+    if (!topic) {
+      alert("No topic was specified.");
+      return;
+    }
+    let request = $.post("/forum/creatediscussion", { topic: topic });
+    request.done(function (data, textStatus, jqXHR) {
+      window.location.href = `/forum/discussion/${data.discussionId}`;
+    });
+    request.fail(function (jqXHR, textStatus, errorThrown) {
+      alert(jqXHR.responseText);
+    });
+  });
   $(document).ready(function () {
     var request = {
       method: "GET",
