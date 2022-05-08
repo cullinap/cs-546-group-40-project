@@ -3,8 +3,18 @@ const router = express.Router();
 const { playerData } = require("../data");
 var xss = require("xss");
 
+function searchNameCheck(name) {
+  let nameRegex = /^[A-Za-z\s]*$/;
+  return !nameRegex.test(name)
+}
+
 function checkInput(value) {
-  if(value.trim().length === 0) 
+  if(
+    value.trim().length === 0 || 
+    typeof value !== 'string' ||
+    searchNameCheck(value) ||
+    value.split(' ').length === 1
+  ) 
       return true
   return false
 }
@@ -43,7 +53,7 @@ router.post("/searchplayers", async (req, res) => {
   if(checkInput(req.body.playerSearchTerm)){
     res.status(400).render(
       'playerfinder', 
-      {msg: 'input must contain values and not be empty'})
+      {msg: 'names must contain letters or not be empty and you must provide first and last name'})
   }
   
   try {
