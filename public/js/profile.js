@@ -70,7 +70,7 @@
       alert("Profile picture must be different from what is already set");
       return;
     }
-    let request = $.post("/myprofile/changepfp", { pfpurl: url });
+    let request = $.post("/profile/changepfp", { pfpurl: url });
     request.done(function (data, textStatus, jqXHR) {
       pfpImg.attr("src", url);
       hideAll();
@@ -96,7 +96,7 @@
       alert("First name must be different from what is already set");
       return;
     }
-    let request = $.post("/myprofile/changename", {
+    let request = $.post("/profile/changename", {
       firstname: firstname,
       lastname: lastname,
     });
@@ -120,7 +120,7 @@
       alert("Username must be different from what is already set");
       return;
     }
-    let request = $.post("/myprofile/changeusn", { username: username });
+    let request = $.post("/profile/changeusn", { username: username });
     request.done(function (data, textStatus, jqXHR) {
       usnField.text(username);
       hideAll();
@@ -141,7 +141,7 @@
       alert("Email must be different from what is already set");
       return;
     }
-    let request = $.post("/myprofile/changeem", { email: email });
+    let request = $.post("/profile/changeem", { email: email });
     request.done(function (data, textStatus, jqXHR) {
       emField.text(email);
       hideAll();
@@ -158,7 +158,7 @@
       alert("No password was specified.");
       return;
     }
-    let request = $.post("/myprofile/changepwd", { password: password });
+    let request = $.post("/profile/changepwd", { password: password });
     request.done(function (data, textStatus, jqXHR) {
       hideAll();
       alert(jqXHR.responseText);

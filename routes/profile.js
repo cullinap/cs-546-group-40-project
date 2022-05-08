@@ -4,7 +4,7 @@ const { userData } = require("../data");
 var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
 
-router.get("/myprofile", async (req, res) => {
+router.get("/profile", async (req, res) => {
   if (!req.session.user) {
     res.redirect("/");
     return;
@@ -25,7 +25,7 @@ router.get("/myprofile", async (req, res) => {
   }
 });
 
-router.post("/myprofile/changepfp", async (req, res) => {
+router.post("/profile/changepfp", async (req, res) => {
   if (!req.session.user) {
     res.status(403);
     return;
@@ -67,7 +67,7 @@ router.post("/myprofile/changepfp", async (req, res) => {
   }
 });
 
-router.post("/myprofile/changename", async (req, res) => {
+router.post("/profile/changename", async (req, res) => {
   if (!req.session.user) {
     res.status(403);
     return;
@@ -119,7 +119,7 @@ router.post("/myprofile/changename", async (req, res) => {
   }
 });
 
-router.post("/myprofile/changeusn", async (req, res) => {
+router.post("/profile/changeusn", async (req, res) => {
   if (!req.session.user) {
     res.status(403);
     return;
@@ -163,7 +163,7 @@ router.post("/myprofile/changeusn", async (req, res) => {
   }
 });
 
-router.post("/myprofile/changepwd", async (req, res) => {
+router.post("/profile/changepwd", async (req, res) => {
   if (!req.session.user) {
     res.status(403);
     return;
@@ -205,7 +205,7 @@ router.post("/myprofile/changepwd", async (req, res) => {
   }
 });
 
-router.post("/myprofile/changeem", async (req, res) => {
+router.post("/profile/changeem", async (req, res) => {
   if (!req.session.user) {
     res.status(403);
     return;
@@ -253,7 +253,17 @@ router.post("/myprofile/changeem", async (req, res) => {
   }
 });
 
-router.get("/myprofile/myteam", async (req, res) => {
+router.get("/profile/:id", async (req, res) => {
+  let userid = req.params.id;
+  try {
+    let selUser = await userData.getUserData(userid);
+    res.status(200).json(selUser);
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+router.get("/profile/myteam", async (req, res) => {
   if (!req.session.user) {
     res.status(403);
     return;
@@ -263,15 +273,12 @@ router.get("/myprofile/myteam", async (req, res) => {
     // for getTeam ... team1 ... team2 ... for player in team ... player1 ... player2
     res.render("myteam", {
       username: username,
-      team: 'playerOne',
+      team: "playerOne",
       title: `${username}'s team`,
     });
   } catch (e) {
     res.status(500).send(e);
   }
 });
-
-
-
 
 module.exports = router;

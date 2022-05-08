@@ -4,7 +4,7 @@
   {{/if}}
   {{#if session.user.username}}
     <h2>Welcome, {{session.user.username}}</h2>
-    <a href="/myprofile">My Profile</a>
+    <a href="/profile">My Profile</a>
     <a href="/logout">Logout</a>
   {{else}}
     <form action="/login" method="POST" id="login-form">
@@ -25,7 +25,7 @@
   <ul id="home-articles" hidden></ul>
   <ul id="home-sports" hidden></ul>
   <div>
-    <a href="/forums">Forums</a>
+    <a href="/forum">Forums</a>
     <a href="/news">Latest news</a>
     <a href="/teamcreator">Create a team</a>
     <a href="/playersearch">Search for players</a>

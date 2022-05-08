@@ -4,6 +4,7 @@ const homeRoutes = require("./home");
 const debugRoutes = require("./debug");
 const authRoutes = require("./auth");
 const profRoutes = require("./profile");
+const forumRoutes = require("./forum");
 
 const constructorMethod = (app) => {
   app.use("/", newsRoutes);
@@ -11,6 +12,7 @@ const constructorMethod = (app) => {
   app.use("/", homeRoutes);
   app.use("/home", homeRoutes);
   app.use("/", authRoutes);
+  app.use("/", forumRoutes);
   app.use("/", profRoutes);
   app.use("/debug", debugRoutes); //temporary
   app.use("*", (req, res) => {
