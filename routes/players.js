@@ -8,6 +8,18 @@ function checkInput(value) {
   return false
 }
 
+function checkApiValues(value) {
+  if(!value)
+      return 'N/A'
+  return value
+}
+
+function checkPlayerImage(img) {
+  if(!img)
+      return "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg"
+  return img
+}
+
 router.get("/playersearch", async (req, res) => {
   try {
     res.render("playerfinder");
@@ -31,11 +43,11 @@ router.post("/searchplayers", async (req, res) => {
 
     res.render("playersearchresult", {
       title: playerName,
-      playerSearchTerm: playerName,
-      playerPhoto: playerStats["headshot"],
-      playerWeight: playerStats["weight"],
-      playerAge: playerStats["age"],
-      playerCareerLength: playerStats["experience"],
+      playerSearchTerm: checkApiValues(playerName),
+      playerPhoto: checkApiValues(playerStats["headshot"]),
+      playerWeight: checkApiValues(playerStats["weight"]),
+      playerAge: checkApiValues(playerStats["age"]),
+      playerCareerLength: checkApiValues(playerStats["experience"]),
     });
   } catch (e) {
     res.status(404);
