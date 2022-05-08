@@ -1,6 +1,6 @@
 const connection = require("../config/mongoConnection");
 const mongoCollections = require("../config/mongoCollections");
-const { userData, userTeamData, utilData } = require("../data");
+const { userData, userTeamData, utilData, discussionData } = require("../data");
 const axios = require("axios");
 const passwordHash = require('password-hash');
 
@@ -12,32 +12,69 @@ async function userSeed() {
     try {
 
         let email_one = 'firstuser@gmail.com';
-        let password_one = passwordHash.generate('12345678')
+        let email_two = 'seconduser@yahoo.com'
     
-        let email_two = 'seconduser@yahoo.com';
-        let password_two = passwordHash.generate('password')
-
         let userOne = await userData.createUser(
             email_one
-            , password_one
+            , '12345678'
         )
 
         let userTwo = await userData.createUser(
             email_two
-            , password_two
+            , 'youllneverguess'
         )
 
         // retrieve user object id 
         let oneId = await utilData.getUserIdByName('firstuser')
+        let twoId = await utilData.getUserIdByName('seconduser')
 
         // create a team 
         let teamOne = await userTeamData.createTeam(
             oneId, 'teamOne', ['Aaron Rodgers','Corey Dillon']
         )
 
-        let addTeamToUser = await utilData.addTeam(
+        let teamTwo = await userTeamData.createTeam(
+            twoId, 'teamDos', ['Patrick Mahomes','Rob Gronk']
+        )
+
+        let addTeamToUserOne = await utilData.addTeam(
             oneId, teamOne
         )
+
+        let addTeamToUserTwo = await utilData.addTeam(
+            twoId, teamTwo
+        )
+
+        let addDiscussion = await discussionData.createDiscussion(
+            String(oneId), 'Dinosaurs'
+        )
+
+        let getDiscussion = await discussionData.getAllDiscussions()
+        
+        let addPost = await discussionData.addPostToDiscussion(
+            String(getDiscussion[0]._id)
+            , String(oneId)
+            , 'Dinosaurs are big'
+        )
+
+        let respondDiscussion = await discussionData.addPostToDiscussion(
+            String(getDiscussion[0]._id)
+            , String(twoId)
+            , 'Birds are dinosaurs'
+        )
+
+        let livelyDebate = await discussionData.createDiscussion(
+            String(twoId), 'Grizzly vs. Silverback'
+        )
+
+        let getMoreDiscussions = await discussionData.getAllDiscussions()
+
+        let debateResponse = await discussionData.addPostToDiscussion(
+            String(getMoreDiscussions[1]._id)
+            , String(twoId)
+            , 'who would win?'
+        )
+
 
     } catch(e) {
         console.log(e)
