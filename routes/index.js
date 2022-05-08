@@ -26,8 +26,7 @@ const constructorMethod = (app) => {
   //profile
   app.use("/", profRoutes);
   //videos
-  app.use("/clips", vidRoutes);
-  app.use("/videos", vidRoutes);
+  app.use("/matches", vidRoutes);
   //tickets
   app.use("/", tckRoutes);
   //debug (remove when submitting)
