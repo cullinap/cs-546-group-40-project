@@ -16,14 +16,14 @@ function checkApiValues(value) {
 }
 
 function formatNames(name) {
+  name = name.split(' ').filter(word => word).join(' ')
+
   name = name.split(' ')
   first = name[0][0].toUpperCase() + name[0].substring(1)
   last = name[1][0].toUpperCase() + name[1].substring(1)
 
   return first + " " + last
 }
-
-console.log(formatNames("khalid dj"))
 
 function checkPlayerImage(img) {
   if(!img)
