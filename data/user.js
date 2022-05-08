@@ -369,6 +369,29 @@ async function getUser(ownerId) {
   return user;
 }
 
+async function getUserData(ownerId) {
+  if (!ownerId) {
+    throw "ownerId is a required field";
+  }
+  if (typeof ownerId != "string") {
+    throw "ownerId must be a string";
+  }
+  ownerId = ownerId.trim();
+  if (!ObjectId.isValid(ownerId)) {
+    throw "ownerId is not a valid id";
+  }
+  const userCollection = await users();
+  const user = await userCollection.findOne({ _id: ObjectId(ownerId) });
+  if (!user) {
+    throw "User not found";
+  }
+  const userInfo = {
+    username: user.username,
+    pfp: user.profilePicture,
+  };
+  return userInfo;
+}
+
 module.exports = {
   getAll,
   getUser,
@@ -383,4 +406,5 @@ module.exports = {
   removePost,
   addTeam,
   removeTeam,
+  getUserData,
 };
