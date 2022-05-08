@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { discussionData, userData } = require("../data");
 const { ObjectId } = require("mongodb");
+var xss = require("xss");
 
 router.get("/forum", async (req, res) => {
   try {
@@ -34,6 +35,7 @@ router.post("/forum/creatediscussion", async (req, res) => {
     return;
   }
   let { topic } = req.body;
+  topic = xss(topic);
   if (!topic) {
     res.status(400).send("topic is a required field");
     return;
@@ -76,6 +78,7 @@ router.post("/forum/addpost", async (req, res) => {
     return;
   }
   let { discussionId, postContent } = req.body;
+  postContent = xss(postContent);
   if (!discussionId) {
     res.status(400).send("discussionId is a required field");
     return;

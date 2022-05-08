@@ -3,6 +3,7 @@ const router = express.Router();
 const { userData, discussionData } = require("../data");
 var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
+var xss = require("xss");
 
 router.get("/profile", async (req, res) => {
   if (!req.session.user) {
@@ -53,6 +54,7 @@ router.post("/profile/changepfp", async (req, res) => {
     res.status(400).send("Profile picture URL is not a string");
     return;
   }
+  pfpUrl = xss(pfpUrl);
   pfpUrl = pfpUrl.trim();
   uid = uid.trim();
   if (!ObjectId.isValid(uid)) {
@@ -104,6 +106,8 @@ router.post("/profile/changename", async (req, res) => {
     res.status(400).send("Last name is not a string");
     return;
   }
+  firstname = xss(firstname);
+  lastname = xss(lastname);
   firstname = firstname.trim();
   lastname = lastname.trim();
   uid = uid.trim();
@@ -148,6 +152,7 @@ router.post("/profile/changeusn", async (req, res) => {
     return;
   }
   username = username.trim();
+  username = xss(username);
   uid = uid.trim();
   if (!ObjectId.isValid(uid)) {
     res.status(400).send("uid is not a valid id");
@@ -234,6 +239,7 @@ router.post("/profile/changeem", async (req, res) => {
     return;
   }
   newemail = newemail.trim();
+  newemail = xss(newemail);
   if (!validator.validate(newemail)) {
     res.status(400).send("Email is not valid");
     return;
@@ -275,7 +281,6 @@ router.get("/profile/myteam", async (req, res) => {
   }
   try {
     let { username } = await userData.getUser(req.session.user.uid);
-
     res.render("myteam", {
       username: username,
       team: "playerOne",
