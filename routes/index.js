@@ -7,13 +7,10 @@ const profRoutes = require("./profile");
 const forumRoutes = require("./forum");
 const vidRoutes = require("./videos");
 const tckRoutes = require("./tickets");
-const teamRoutes = require("./teams");
 
 const constructorMethod = (app) => {
   //news
   app.use("/", newsRoutes);
-  // make a team
-  app.use("/", teamRoutes)
   //players
   app.use("/", playerRoutes);
   //home

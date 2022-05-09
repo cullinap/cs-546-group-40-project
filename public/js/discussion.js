@@ -24,6 +24,15 @@
       alert("No topic was specified.");
       return;
     }
+    if (typeof content != "string") {
+      alert("Topic is not a string");
+      return;
+    }
+    content = content.trim();
+    if (content.length == 0) {
+      alert("No topic was specified.");
+      return;
+    }
     let request = $.post("/forum/addpost", {
       discussionId: discussionId,
       postContent: content,

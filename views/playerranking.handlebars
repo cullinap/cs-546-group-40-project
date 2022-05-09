@@ -1,52 +1,53 @@
 <article>
-    <h2>{{title}}</h2>
-    <p>Passing Yards</p>
+  <h2 class="header-titles">{{title}}</h2>
+  <div class="container">
+    <h3>Passing Yards</h3>
     {{#if passingYards}}
-    <ul>
+      <ul>
         {{#each passingYards}}
-            <li><p>{{this}}</p></li>
+          <li><p>{{this}}</p></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
-    <p>Rushing Yards</p>
+    <h3>Rushing Yards</h3>
     {{#if rushingYards}}
-    <ul>
+      <ul>
         {{#each rushingYards}}
-            <li><p>{{this}}</p></li>
+          <li><p>{{this}}</p></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
-    <p>Receiving Yards</p>
+    <h3>Receiving Yards</h3>
     {{#if receivingYards}}
-    <ul>
+      <ul>
         {{#each receivingYards}}
-            <li><p>{{this}}</p></li>
+          <li><p>{{this}}</p></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
-    <p>Sacks</p>
+    <h3>Sacks</h3>
     {{#if sacks}}
-    <ul>
+      <ul>
         {{#each sacks}}
-            <li><p>{{this}}</p></li>
+          <li><p>{{this}}</p></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
-    <p>Passing Touchdowns</p>
+    <h3>Passing Touchdowns</h3>
     {{#if passingTouchdowns}}
-    <ul>
+      <ul>
         {{#each passingTouchdowns}}
-            <li><p>{{this}}</p></li>
+          <li><p>{{this}}</p></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
-    <p>Quarterback Rating</p>
+    <h3>Quarterback Rating</h3>
     {{#if quarterbackRating}}
-    <ul>
+      <ul>
         {{#each quarterbackRating}}
-            <li><p>{{this}}</p></li>
+          <li><p>{{this}}</p></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
+  </div>
 </article>
-<a href="/">Go back home</a>

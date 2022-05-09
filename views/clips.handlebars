@@ -1,26 +1,29 @@
 <article>
-  <h2 class="clip-header">Recent Matches and Clips</h2>
-  {{#if espn}}
-    <h2>ESPN</h2>
-    <ul>
-      {{#each espn}}
-        <li><a
-            href="https://youtu.be/{{id.videoId}}"
-            target="_blank"
-          >{{snippet.title}}</a></li>
-      {{/each}}
-    </ul>
-  {{/if}}
-  {{#if nbc}}
-    <h2>NBC Sports</h2>
-    <ul>
-      {{#each nbc}}
-        <li><a
-            href="https://youtu.be/{{id.videoId}}"
-            target="_blank"
-          >{{snippet.title}}</a></li>
-      {{/each}}
-    </ul>
-  {{/if}}
+  <h2 class="header-titles">Recent Matches and Clips</h2>
+  <div class="container">
+    {{#if espn}}
+      <h2>ESPN</h2>
+      <ul>
+        {{#each espn}}
+          <li><a
+              href="https://youtu.be/{{id.videoId}}"
+              target="_blank"
+              class="text link"
+            >{{snippet.title}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#if nbc}}
+      <h2>NBC Sports</h2>
+      <ul>
+        {{#each nbc}}
+          <li><a
+              href="https://youtu.be/{{id.videoId}}"
+              target="_blank"
+              class="text link"
+            >{{snippet.title}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
 </article>
-<a class="nav-link active text" href="/">Back to home</a>

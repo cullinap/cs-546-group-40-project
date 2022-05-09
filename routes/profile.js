@@ -11,7 +11,7 @@ router.get("/profile", async (req, res) => {
     return;
   }
   try {
-    let { username, email, profilePicture, firstName, lastName, posts, teams } =
+    let { username, email, profilePicture, firstName, lastName, posts } =
       await userData.getUser(req.session.user.uid);
     let postList = [];
     for (let i = 0; i < posts.length; i++) {
@@ -24,7 +24,6 @@ router.get("/profile", async (req, res) => {
       firstname: firstName,
       lastname: lastName,
       posts: postList,
-      teams: teams,
       title: `${username}'s Profile`,
     });
   } catch (e) {
@@ -201,7 +200,7 @@ router.post("/profile/changepwd", async (req, res) => {
     return;
   }
   try {
-    let response = await userData.updateUserPwd(email, password);
+    let response = await userData.updateUserPwd(uid, password);
     if (response) {
       res.status(200).send("Successfully changed password.");
     } else {

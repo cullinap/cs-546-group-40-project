@@ -11,29 +11,17 @@ async function getApiData(url) {
 }
 
 async function getFootballTickets() {
-  try {
-    let res = await getApiData(tmfb);
-    return res._embedded.events;
-  } catch (e) {
-    console.log(e);
-  }
+  let res = await getApiData(tmfb);
+  return res._embedded.events;
 }
 
 async function getBaseballTickets() {
-  try {
-    let res = await getApiData(tmbab);
-    return res._embedded.events;
-  } catch (e) {
-    console.log(e);
-  }
+  let res = await getApiData(tmbab);
+  return res._embedded.events;
 }
 async function getBasketballTickets() {
-  try {
-    let res = await getApiData(tmbb);
-    return res._embedded.events;
-  } catch (e) {
-    console.log(e);
-  }
+  let res = await getApiData(tmbb);
+  return res._embedded.events;
 }
 
 module.exports = {

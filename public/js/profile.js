@@ -66,6 +66,11 @@
       alert("No URL was specified.");
       return;
     }
+    if (typeof url != "string") {
+      alert("URL is not of type string");
+      return;
+    }
+    url = url.trim();
     if (url === pfpImg.attr("src")) {
       alert("Profile picture must be different from what is already set");
       return;
@@ -85,13 +90,23 @@
     let firstname = $("#firstname").val();
     let lastname = $("#lastname").val();
     if (!firstname) {
-      alert("No first name was specified.");
+      alert("No firstname was specified.");
       return;
     }
     if (!lastname) {
-      alert("No lastname name was specified.");
+      alert("No lastname was specified.");
       return;
     }
+    if (typeof firstname != "string") {
+      alert("First name is not a string");
+      return;
+    }
+    if (typeof lastname != "string") {
+      alert("Lastname is not a string");
+      return;
+    }
+    firstname = firstname.trim();
+    lastname = lastname.trim();
     if (firstname.includes(nameField.text())) {
       alert("First name must be different from what is already set");
       return;
@@ -116,6 +131,15 @@
       alert("No username was specified.");
       return;
     }
+    if (!username) {
+      alert("No Username was specified.");
+      return;
+    }
+    if (typeof username != "string") {
+      alert("Username is not a string");
+      return;
+    }
+    username = username.trim();
     if (username === usnField.text()) {
       alert("Username must be different from what is already set");
       return;
@@ -137,6 +161,11 @@
       alert("No email was specified.");
       return;
     }
+    if (typeof email != "string") {
+      alert("Email is not a string");
+      return;
+    }
+    email = email.trim();
     if (email === emField.text()) {
       alert("Email must be different from what is already set");
       return;
@@ -158,6 +187,11 @@
       alert("No password was specified.");
       return;
     }
+    if (typeof password != "string") {
+      alert("Password is not a string");
+      return;
+    }
+    password = password.trim();
     let request = $.post("/profile/changepwd", { password: password });
     request.done(function (data, textStatus, jqXHR) {
       hideAll();

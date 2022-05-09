@@ -14,7 +14,8 @@ router.get("/tickets", async (req, res) => {
       bb: bb,
     });
   } catch (e) {
-    res.status(500).json({ error: e });
+    //really hacky but this is literally just because ticketmaster is really low load server and we are (apparently) sending too many reqs (429)
+    res.redirect("/tickets")
     return;
   }
 });
