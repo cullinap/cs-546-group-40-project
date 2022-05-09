@@ -1,27 +1,33 @@
 <article>
-  <h2>Tickets</h2>
-  {{#if fb}}
-    <h2>Football</h2>
-    <ul>
-      {{#each fb}}
-        <li><a href="{{url}}" target="_blank" class="text link">{{name}}, {{dates.start.localDate}}</a></li>
-      {{/each}}
-    </ul>
-  {{/if}}
-  {{#if bab}}
-    <h2>Baseball</h2>
-    <ul>
-      {{#each bab}}
-        <li><a href="{{url}}" target="_blank" class="text link">{{name}}, {{dates.start.localDate}}</a></li>
-      {{/each}}
-    </ul>
-  {{/if}}
-  {{#if bb}}
-    <h2>Basketball</h2>
-    <ul>
-      {{#each bb}}
-        <li><a href="{{url}}" target="_blank" class="text link">{{name}}, {{dates.start.localDate}}</a></li>
-      {{/each}}
-    </ul>
-  {{/if}}
+  <div class="container">
+    <h2 class="header-titles">Tickets</h2>
+    {{#if fb}}
+      <h2>Football</h2>
+      <ul>
+        {{#each fb}}
+          <li><a href="{{url}}" target="_blank" class="text link">{{name}},
+              {{dates.start.localDate}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#if bab}}
+      <h2>Baseball</h2>
+      <ul>
+        {{#each bab}}
+          <li><a href="{{url}}" target="_blank" class="text link">{{name}},
+              {{dates.start.localDate}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+    {{#if bb}}
+      <h2>Basketball</h2>
+      <ul>
+        {{#each bb}}
+          <li><a href="{{url}}" target="_blank" class="text link">{{name}},
+              {{dates.start.localDate}}</a></li>
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+
 </article>
