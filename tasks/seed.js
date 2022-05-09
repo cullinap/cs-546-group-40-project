@@ -1,6 +1,6 @@
 const connection = require("../config/mongoConnection");
 const mongoCollections = require("../config/mongoCollections");
-const { userData, userTeamData, utilData, discussionData } = require("../data");
+const { userData, utilData, discussionData } = require("../data");
 const axios = require("axios");
 const passwordHash = require('password-hash');
 
@@ -27,24 +27,6 @@ async function userSeed() {
         // retrieve user object id 
         let oneId = await utilData.getUserIdByName('firstuser')
         let twoId = await utilData.getUserIdByName('seconduser')
-
-        // create a team 
-        let teamOne = await userTeamData.createTeam(
-            String(oneId), 'teamOne'
-        )
-
-        let teamTwo = await userTeamData.createTeam(
-            String(twoId), 'teamDos'
-        )
-
-        // team is added through createTeam
-        // let addTeamToUserOne = await userData.addTeam(
-        //     String(oneId), teamOne._id
-        // )
-
-        // let addTeamToUserTwo = await userData.addTeam(
-        //     String(twoId), teamTwo._id
-        // )
 
         let addDiscussion = await discussionData.createDiscussion(
             String(oneId), 'Dinosaurs'
