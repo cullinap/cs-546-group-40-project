@@ -30,20 +30,21 @@ async function userSeed() {
 
         // create a team 
         let teamOne = await userTeamData.createTeam(
-            oneId, 'teamOne', ['Aaron Rodgers','Corey Dillon']
+            String(oneId), 'teamOne'
         )
 
         let teamTwo = await userTeamData.createTeam(
-            twoId, 'teamDos', ['Patrick Mahomes','Rob Gronk']
+            String(twoId), 'teamDos'
         )
 
-        let addTeamToUserOne = await utilData.addTeam(
-            oneId, teamOne
-        )
+        // team is added through createTeam
+        // let addTeamToUserOne = await userData.addTeam(
+        //     String(oneId), teamOne._id
+        // )
 
-        let addTeamToUserTwo = await utilData.addTeam(
-            twoId, teamTwo
-        )
+        // let addTeamToUserTwo = await userData.addTeam(
+        //     String(twoId), teamTwo._id
+        // )
 
         let addDiscussion = await discussionData.createDiscussion(
             String(oneId), 'Dinosaurs'
@@ -51,10 +52,16 @@ async function userSeed() {
 
         let getDiscussion = await discussionData.getAllDiscussions()
         
-        let addPost = await discussionData.addPostToDiscussion(
+        let addAPost = await discussionData.addPostToDiscussion(
             String(getDiscussion[0]._id)
             , String(oneId)
             , 'Dinosaurs are big'
+        )
+
+        // console.log(addAPost)
+
+        let tiePostToUser = await userData.addPost(
+            String(oneId), String(addAPost)
         )
 
         let respondDiscussion = await discussionData.addPostToDiscussion(
