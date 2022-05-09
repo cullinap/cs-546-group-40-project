@@ -33,11 +33,6 @@ run the repo locally:
 npm start
 ```
 
-#### Usage
-
-- Make a user profile
-- Check some news
-
 
 ##### Team
 
