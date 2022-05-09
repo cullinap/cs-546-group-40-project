@@ -15,6 +15,10 @@ body {
     text-align: center;
 }
 
+.link {
+  color: #0067f0;
+}
+
 .text {
   font-family: Arial, Helvetica, sans-serif;
 }

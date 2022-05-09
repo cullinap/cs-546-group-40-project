@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/cullinap/cs-546-group-40-project#readme",
   "dependencies": {
-    "@khanacademy/tota11y": "^0.2.0",
     "axios": "^0.26.1",
     "bcrypt": "^5.0.1",
     "email-validator": "^2.0.4",

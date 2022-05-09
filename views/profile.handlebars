@@ -63,18 +63,8 @@
             {{#each posts}}
               <li><a
                   href="/forum/discussion/{{discussionId}}"
-                  class="text"
+                  class="text link"
                 >{{content}}</a></li>
-            {{/each}}
-          </ul>
-        {{else}}
-          <p class="text">None</p>
-        {{/if}}
-        <h2 class="text">Teams</h2>
-        {{#if teams}}
-          <ul>
-            {{#each teams}}
-              <li class="text">{{name}}</li>
             {{/each}}
           </ul>
         {{else}}
