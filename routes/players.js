@@ -14,6 +14,7 @@ function formatNames(name) {
   if (name.length == 1) {
     throw "Invalid string"
   }
+  last = name[1][0].toUpperCase() + name[1].substring(1);
 
   return first + " " + last;
 }
