@@ -5,8 +5,12 @@ const espnclips = `https://www.googleapis.com/youtube/v3/search?&key=${gooogleap
 const nbcclips = `https://www.googleapis.com/youtube/v3/search?&key=${gooogleapikey}&channelId=UCqZQlzSHbVJrwrn5XvzrzcA&part=snippet,id&order=date&maxResults=20`;
 
 async function getApiData(url) {
-  let { data } = await axios.get(url);
-  return data;
+  try {
+    let { data } = await axios.get(url);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 async function getEspnClips() {

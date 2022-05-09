@@ -13,8 +13,12 @@ const scoringLeaderUrl =
   "https://site.api.espn.com/apis/site/v3/sports/football/nfl/leaders?season=2021";
 
 async function getApiData(url) {
-  let { data } = await axios.get(url);
-  return data;
+  try {
+    let { data } = await axios.get(url);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 module.exports = {
@@ -24,21 +28,50 @@ module.exports = {
   },
 
   async getPlayerStatistics(playerId) {
+    if (!playerId) {
+      throw "playerId is a required field";
+    }
+    if (typeof playerId != "string") {
+      throw "playerId must be a string";
+    }
+    playerId = playerId.trim();
+    if (!ObjectId.isValid(playerId)) {
+      throw "playerId is not a valid id";
+    }
     let indPlayerUrl = playerDataUrl + playerId;
     let apiData = await getApiData(indPlayerUrl);
     return apiData;
   },
 
   async mapEspnIdToPlayer(espnid, firstName, lastName) {
+    if (!espnid) {
+      throw "espnid is a required field";
+    }
+    if (typeof espnid != "string") {
+      throw "espnid must be a string";
+    }
+    if (!firstName) {
+      throw "firstName is a required field";
+    }
+    if (!lastName) {
+      throw "lastName is a required field";
+    }
+    if (typeof firstName != "string") {
+      throw "First name is not a string";
+    }
+    if (typeof lastName != "string") {
+      throw "Last name is not a string";
+    }
+    espnid = espnid.trim();
+    firstName = xss(firstName.trim());
+    lastName = xss(lastName.trim());
     const playerCollection = await playerData();
-
     let player = {
       espnid: espnid,
       firstName: firstName,
       lastName: lastName,
     };
-
-    const insertInfo = await playerCollection.insertOne(player);
+    await playerCollection.insertOne(player);
     return player;
   },
 
@@ -48,6 +81,13 @@ module.exports = {
   },
 
   async getCollege(href) {
+    if (!href) {
+      throw "link is a required field";
+    }
+    if (typeof href != "string") {
+      throw "link must be a string";
+    }
+    href = xss(href.trim());
     const college = await getApiData(href);
     return college;
   },

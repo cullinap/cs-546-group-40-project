@@ -66,7 +66,6 @@ router.get("/ladder", async (req, res) => {
   try {
     let nflLeaders;
     nflLeaders = await playerData.scoringLeaders();
-    console.log(nflLeaders);
     res.render("playerranking", {
       title: "Top 5 players for each statistic",
       passingYards: nflLeaders["passingYards"],

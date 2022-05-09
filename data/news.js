@@ -10,8 +10,12 @@ const baseballNews =
   "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news";
 
 async function getApiData(url) {
-  let { data } = await axios.get(url);
-  return data;
+  try {
+    let { data } = await axios.get(url);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 async function getNflNews() {

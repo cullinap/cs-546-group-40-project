@@ -6,34 +6,26 @@ const tmbab = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&keyw
 const tmbb = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&keyword="basketball"&apikey=${tmkey}`;
 
 async function getApiData(url) {
-  let { data } = await axios.get(url);
-  return data;
+  try {
+    let { data } = await axios.get(url);
+    return data;
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 async function getFootballTickets() {
-  try {
-    let res = await getApiData(tmfb);
-    return res._embedded.events;
-  } catch (e) {
-    console.log(e);
-  }
+  let res = await getApiData(tmfb);
+  return res._embedded.events;
 }
 
 async function getBaseballTickets() {
-  try {
-    let res = await getApiData(tmbab);
-    return res._embedded.events;
-  } catch (e) {
-    console.log(e);
-  }
+  let res = await getApiData(tmbab);
+  return res._embedded.events;
 }
 async function getBasketballTickets() {
-  try {
-    let res = await getApiData(tmbb);
-    return res._embedded.events;
-  } catch (e) {
-    console.log(e);
-  }
+  let res = await getApiData(tmbb);
+  return res._embedded.events;
 }
 
 module.exports = {

@@ -32,7 +32,6 @@ router.post("/addteam", async (req, res) => {
     }
     teamname = xss(teamname.trim());
     let createTeam = await userTeamData.createTeam(uid, teamname);
-    console.log(createTeam);
     let response = await utilData.addTeam(uid, createTeam._id);
     if (!response) {
       res.status(500).send("failed to add to user");

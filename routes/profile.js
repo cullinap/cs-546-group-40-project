@@ -4,6 +4,7 @@ const { userData, discussionData } = require("../data");
 var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
 var xss = require("xss");
+const user_team = require("../data/user_team");
 
 router.get("/profile", async (req, res) => {
   if (!req.session.user) {
@@ -17,6 +18,10 @@ router.get("/profile", async (req, res) => {
     for (let i = 0; i < posts.length; i++) {
       postList.push(await discussionData.getPost(posts[i]));
     }
+    let teamList = [];
+    for (let i = 0; i < teams.length; i++) {
+      teamList.push(await user_team.getTeam(teams[i]));
+    }
     res.render("profile", {
       username: username,
       email: email,
@@ -24,7 +29,7 @@ router.get("/profile", async (req, res) => {
       firstname: firstName,
       lastname: lastName,
       posts: postList,
-      teams: teams,
+      teams: teamList,
       title: `${username}'s Profile`,
     });
   } catch (e) {
@@ -201,7 +206,7 @@ router.post("/profile/changepwd", async (req, res) => {
     return;
   }
   try {
-    let response = await userData.updateUserPwd(email, password);
+    let response = await userData.updateUserPwd(uid, password);
     if (response) {
       res.status(200).send("Successfully changed password.");
     } else {

@@ -7,6 +7,17 @@
       alert("No topic was specified.");
       return;
     }
+    if (typeof topic != "string") {
+      alert("Topic is not a string");
+      return;
+    }
+    topic = topic.trim();
+    if (topic.length == 0) {
+      if (!topic) {
+        alert("No topic was specified.");
+        return;
+      }
+    }
     let request = $.post("/forum/creatediscussion", { topic: topic });
     request.done(function (data, textStatus, jqXHR) {
       window.location.href = `/forum/discussion/${data.discussionId}`;

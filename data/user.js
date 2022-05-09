@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const saltRounds = 16;
 var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
+var xss = require("xss");
+
 
 async function createUser(email, password) {
   if (!email) {
@@ -214,8 +216,8 @@ async function updateUserName(ownerId, firstname, lastname) {
     throw "Last name is not a string";
   }
   ownerId = ownerId.trim();
-  firstname = firstname.trim();
-  lastname = lastname.trim();
+  firstname = xss(firstname.trim());
+  lastname = xss(lastname.trim());
   if (!ObjectId.isValid(ownerId)) {
     throw "ownerId is not a valid id";
   }
@@ -241,7 +243,7 @@ async function updateUserUsn(ownerId, username) {
     throw "Username is not a string";
   }
   ownerId = ownerId.trim();
-  username = username.trim().toLowerCase();
+  username = xss(username.trim().toLowerCase());
   if (!ObjectId.isValid(ownerId)) {
     throw "ownerId is not a valid id";
   }
@@ -271,7 +273,7 @@ async function updateUserEm(ownerId, newemail) {
     throw "newemail is not a string";
   }
   ownerId = ownerId.trim();
-  newemail = newemail.trim();
+  newemail = xss(newemail.trim());
   if (!ObjectId.isValid(ownerId)) {
     throw "ownerId is not a valid id";
   }

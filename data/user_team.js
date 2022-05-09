@@ -36,7 +36,7 @@ module.exports = {
     if (!insertInfo.acknowledged || !insertInfo.insertedId) {
       throw "Could not add team to db";
     }
-    await userData.addTeam(ownerId, userTeam._id);
+    await userData.addTeam(ownerId, userTeam._id.toString());
     return { teamInserted: true, teamId: userTeam._id };
   },
 
@@ -44,6 +44,24 @@ module.exports = {
     const userTeamCollection = await userTeamData();
     const userList = await userTeamCollection.find({}).toArray();
     return userList;
+  },
+
+  async getTeam(teamId) {
+    if (!teamId) {
+      throw "teamId is a required field";
+    }
+    if (typeof teamId != "string") {
+      throw "teamId must be a string";
+    }
+    teamId = teamId.trim();
+    if (!ObjectId.isValid(teamId)) {
+      throw "teamId must be a valid id";
+    }
+    const userTeamCollection = await userTeamData();
+    const userTeamOne = await userTeamCollection.findOne({
+      _id: ObjectId(teamId),
+    });
+    return userTeamOne;
   },
 
   async getAllUsersIdAndName() {

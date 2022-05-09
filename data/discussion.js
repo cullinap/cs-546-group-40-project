@@ -2,6 +2,7 @@ const mongoCollections = require("../config/mongoCollections");
 const discussions = mongoCollections.discussion_data;
 const userData = require("./user");
 const { ObjectId } = require("mongodb");
+var xss = require("xss");
 
 async function createDiscussion(ownerId, topic) {
   if (!ownerId) {
@@ -17,7 +18,7 @@ async function createDiscussion(ownerId, topic) {
     throw "Topic must be a string";
   }
   ownerId = ownerId.trim();
-  topic = topic.trim();
+  topic = xss(topic.trim());
   if (!ObjectId.isValid(ownerId)) {
     throw "ownerId is not a valid id";
   }
@@ -70,7 +71,7 @@ async function addPostToDiscussion(discussionId, postOwnerId, postContent) {
   if (typeof postContent != "string") {
     throw "psotContent must be a string";
   }
-  postContent = postContent.trim();
+  postContent = xss(postContent.trim());
   const discussionCollection = await discussions();
   const newPost = {
     _id: ObjectId(),
