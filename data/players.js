@@ -1,7 +1,7 @@
 const axios = require("axios");
 const mongoCollections = require("../config/mongoCollections");
 const playerData = mongoCollections.player_data;
-const { ObjectId } = require("mongodb");
+var xss = require("xss");
 
 const playerIDMaps =
   "https://cullinap.github.io/data_sources/player_id_map.json";
@@ -35,9 +35,6 @@ module.exports = {
       throw "playerId must be a string";
     }
     playerId = playerId.trim();
-    if (!ObjectId.isValid(playerId)) {
-      throw "playerId is not a valid id";
-    }
     let indPlayerUrl = playerDataUrl + playerId;
     let apiData = await getApiData(indPlayerUrl);
     return apiData;

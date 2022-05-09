@@ -6,7 +6,6 @@ body {
 #main-header {
   font-size: 80px;
   text-align: center;
-
 }
 
 .subheadings {
@@ -42,16 +41,7 @@ body {
   
 }
 
-.mb-2 input{
-  background: linear-gradient(to top, rgba(30, 30, 30, 0.8)50%,rgba(30, 30, 30, 0.8)50%);
-  color:white;
-}
-
-.mb-2 input:focus{
-  color: white;
-}
-
-.clip-header{
+.header-titles{
   text-align: center;
 }
 

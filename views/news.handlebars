@@ -1,28 +1,44 @@
 <article>
-    <h2>Latest NFL News</h2>
+  <h2 class="header-titles">Latest News</h2>
+  <div class="container">
+    <h3>Latest NFL News</h3>
     {{#if nflArticles}}
-    <ul>
+      <ul>
         {{#each nflArticles}}
-        <li><a href="{{links.web.href}}" target="_blank" class="text link">{{headline}}</a></li>
+          <li><a
+              href="{{links.web.href}}"
+              target="_blank"
+              class="text link"
+            >{{headline}}</a></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
 
-    <h2>Latest College Football News</h2>
+    <h3>Latest College Football News</h3>
     {{#if collegeArticles}}
-    <ul>
+      <ul>
         {{#each collegeArticles}}
-        <li><a href="{{links.web.href}}" target="_blank" class="text link">{{headline}}</a></li>
+          <li><a
+              href="{{links.web.href}}"
+              target="_blank"
+              class="text link"
+            >{{headline}}</a></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
 
-    <h2>Latest Baseball News</h2>
+    <h3>Latest Baseball News</h3>
     {{#if baseballArticles}}
-    <ul>
+      <ul>
         {{#each baseballArticles}}
-        <li><a href="{{links.web.href}}" target="_blank" class="text link">{{headline}}</a></li>
+          <li><a
+              href="{{links.web.href}}"
+              target="_blank"
+              class="text link"
+            >{{headline}}</a></li>
         {{/each}}
-    </ul>
+      </ul>
     {{/if}}
+  </div>
+
 </article>

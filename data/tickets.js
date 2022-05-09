@@ -6,12 +6,8 @@ const tmbab = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&keyw
 const tmbb = `https://app.ticketmaster.com/discovery/v2/events.json?size=5&keyword="basketball"&apikey=${tmkey}`;
 
 async function getApiData(url) {
-  try {
-    let { data } = await axios.get(url);
-    return data;
-  } catch (e) {
-    console.log(e);
-  }
+  let { data } = await axios.get(url);
+  return data;
 }
 
 async function getFootballTickets() {
