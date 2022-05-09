@@ -6,7 +6,6 @@ var validator = require("email-validator");
 const { ObjectId } = require("mongodb");
 var xss = require("xss");
 
-
 async function createUser(email, password) {
   if (!email) {
     throw "Email is a required field";
@@ -20,7 +19,7 @@ async function createUser(email, password) {
   if (typeof password != "string") {
     throw "Password must be a string";
   }
-  email = email.trim().toLowerCase();
+  email = xss(email.trim().toLowerCase());
   if (!validator.validate(email)) {
     throw "Email is not valid";
   }
@@ -39,7 +38,6 @@ async function createUser(email, password) {
     firstName: "",
     lastName: "",
     username: email.split("@")[0], //make this the prefix of email before the @
-    teams: [],
     profilePicture: "",
     posts: [],
   };
@@ -63,7 +61,7 @@ async function checkUser(email, password) {
   if (typeof password != "string") {
     throw "Password must be a string";
   }
-  email = email.trim().toLowerCase();
+  email = xss(email.trim().toLowerCase());
   if (!validator.validate(email)) {
     throw "Email is not valid";
   }
@@ -108,64 +106,6 @@ async function addPost(ownerId, postId) {
   const update = await usersCollection.updateOne(
     { _id: ObjectId(ownerId) },
     { $push: { posts: postId } }
-  );
-  return update.modifiedCount != 0;
-}
-
-async function addTeam(ownerId, teamId) {
-  if (!ownerId) {
-    throw "ownerId is a required field";
-  }
-  if (!teamId) {
-    throw "teamId is a required field";
-  }
-  if (typeof ownerId != "string") {
-    throw "ownerId must be a string";
-  }
-  if (typeof teamId != "string") {
-    throw "teamId must be a string";
-  }
-  ownerId = ownerId.trim();
-  teamId = teamId.trim();
-  if (!ObjectId.isValid(ownerId)) {
-    throw "ownerId is not a valid id";
-  }
-  if (!ObjectId.isValid(teamId)) {
-    throw "teamId is not a valid id";
-  }
-  const usersCollection = await users();
-  const update = await usersCollection.updateOne(
-    { _id: ObjectId(ownerId) },
-    { $push: { teams: teamId } }
-  );
-  return update.modifiedCount != 0;
-}
-
-async function removeTeam(ownerId, teamId) {
-  if (!ownerId) {
-    throw "ownerId is a required field";
-  }
-  if (!teamId) {
-    throw "teamId is a required field";
-  }
-  if (typeof ownerId != "string") {
-    throw "ownerId must be a string";
-  }
-  if (typeof teamId != "string") {
-    throw "teamId must be a string";
-  }
-  ownerId = ownerId.trim();
-  teamId = teamId.trim();
-  if (!ObjectId.isValid(ownerId)) {
-    throw "ownerId is not a valid id";
-  }
-  if (!ObjectId.isValid(teamId)) {
-    throw "teamId is not a valid id";
-  }
-  const usersCollection = await users();
-  const update = await usersCollection.updateOne(
-    { _id: ObjectId(ownerId) },
-    { $pull: { teams: teamId } }
   );
   return update.modifiedCount != 0;
 }
@@ -376,7 +316,5 @@ module.exports = {
   updateUserUsn,
   updateUserName,
   addPost,
-  addTeam,
-  removeTeam,
   getUserData,
 };

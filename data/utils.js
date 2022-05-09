@@ -36,29 +36,7 @@ async function getAll() {
   return userList;
 }
 
-async function addTeam(id, team) {
-    if (!id) {
-      throw "ownerId is a required field";
-    }
-    if (!team) {
-      throw "ownerId is a required field";
-    }
-    ownerId = ownerId.trim();
-    team = team.trim();
-    if (!ObjectId.isValid(id)) {
-      throw "ownerId is not a valid id";
-    }
-    if (typeof team != "string") {
-      throw "username must be a string";
-    }
-    const usersCollection = await users();
-    const updateTeam = await usersCollection
-        .updateOne({ _id: id }, { $push: { teams: team } })
-    return updateTeam
-}
-
 module.exports = {
   getAllUsersIdAndName,
   getUserIdByName,
-  addTeam,
 };

@@ -235,8 +235,7 @@ router.post("/profile/changeem", async (req, res) => {
     res.status(400).send("newemail is not a string");
     return;
   }
-  newemail = newemail.trim();
-  newemail = xss(newemail);
+  newemail = xss(newemail.trim());
   if (!validator.validate(newemail)) {
     res.status(400).send("Email is not valid");
     return;
@@ -263,45 +262,22 @@ router.post("/profile/changeem", async (req, res) => {
 
 router.get("/profile/:id", async (req, res) => {
   let userid = req.params.id;
+  if (!userid) {
+    res.status(400).send("userid is a required field");
+    return;
+  }
+  if (typeof userid != "string") {
+    res.status(400).send("userid must be a string");
+    return;
+  }
+  userid = userid.trim();
+  if (!ObjectId.isValid(userid)) {
+    res.status(400).send("userid is not valid");
+    return;
+  }
   try {
     let selUser = await userData.getUserData(userid);
     res.status(200).json(selUser);
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
-
-router.get("/profile/myteam", async (req, res) => {
-  if (!req.session.user) {
-    res.status(403);
-    return;
-  }
-  try {
-    let { username } = await userData.getUser(req.session.user.uid);
-    res.render("myteam", {
-      username: username,
-      team: "playerOne",
-      title: `${username}'s team`,
-    });
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
-
-router.post("/profile/addplayer", async (req, res) => {
-  if (!req.session.user) {
-    res.status(403);
-    return;
-  }
-  try {
-    let { username } = await userData.getUser(req.session.user.uid);
-    let playerTerm = req.body.playerAddTerm;
-
-    res.render("myteam", {
-      username: username,
-      team: playerTerm,
-      title: `${username}'s team`,
-    });
   } catch (e) {
     res.status(500).send(e);
   }

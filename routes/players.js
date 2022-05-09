@@ -3,10 +3,6 @@ const router = express.Router();
 const { playerData } = require("../data");
 var xss = require("xss");
 
-function searchNameCheck(name) {
-  let nameRegex = /^[A-Za-z\s]*$/;
-  return !nameRegex.test(name);
-}
 function formatNames(name) {
   name = name
     .split(" ")

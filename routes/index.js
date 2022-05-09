@@ -1,7 +1,6 @@
 const playerRoutes = require("./players");
 const newsRoutes = require("./news");
 const homeRoutes = require("./home");
-const debugRoutes = require("./debug");
 const authRoutes = require("./auth");
 const profRoutes = require("./profile");
 const forumRoutes = require("./forum");
@@ -26,8 +25,6 @@ const constructorMethod = (app) => {
   app.use("/matches", vidRoutes);
   //tickets
   app.use("/", tckRoutes);
-  //debug (remove when submitting)
-  app.use("/debug", debugRoutes); //temporary
   app.use("*", (req, res) => {
     res.status(404);
   });
