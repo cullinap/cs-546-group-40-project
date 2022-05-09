@@ -1,18 +1,24 @@
 <article>
-  {{#if alert}}
-    <h1>{{alert}}</h1>
-  {{/if}}
-  <h1>Signup</h1>
-  <form action="/signup" method="POST" id="signup-form">
-    <label for="email">Enter your email:</label>
-    <input type="text" name="email" id="email" placeholder="Email" />
-    <label for="password">Enter a password:</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      placeholder="Password"
-    />
-    <button type="submit">Submit</button>
-  </form>
+  <div class="container">
+    <div class="row">
+      {{#if alert}}
+        <h2>{{alert}}</h2>
+      {{/if}}
+      <h2 class="header-titles">Signup</h2>
+    </div>
+    <div class="row align-items-center">
+      <form action="/signup" method="POST" id="signup-form">
+        <label for="email">Enter your email:</label>
+        <input type="text" name="email" id="email" placeholder="Email" />
+        <label for="password">Enter a password:</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
 </article>

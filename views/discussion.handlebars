@@ -7,20 +7,18 @@
           <li>
             {{#if ownerPfp}}
               <img
-                id="discussion-post-author-pfp"
                 alt="Profile Picture"
                 class="profile-img"
                 src="{{ownerPfp}}"
               />
             {{else}}
               <img
-                id="discussion-post-author-pfp"
                 class="profile-img"
                 alt="Profile Picture"
                 src="/public/img/no_image.jpeg"
               />
             {{/if}}
-            <p id="discussion-post-author">Author: {{ownerUsn}}</p>
+            <p>Author: {{ownerUsn}}</p>
             <p>{{content}}</p>
             <p>{{date}}</p>
           </li>
